@@ -1,6 +1,6 @@
 # SceneSignal implementation and evidence
 
-PR #2 merged the endpoint session foundation, including partial SS-01 through SS-06 and seven lifecycle tests. The next spatial/evidence candidate brings the application to 13 software tests: contributor consent, physical-output identity deduplication, fixed/tracked placement, Spime calibration/freshness, real bounded PCM auditions and endpoint-encrypted evidence uploads. These are portable implementations with explicit channel/coordinate test adapters. The audio core is a separately prepared package pinned to immutable source.
+PRs #2 and #3 merged the session and spatial/evidence foundations. The browser-workspace candidate brings the application to 17 software tests: session safety, contributor consent, physical-output identity deduplication, fixed/tracked placement, Spime freshness, bounded PCM auditions, encrypted evidence and built-bundle draft workflows. Test identity, channel, coordinate and audio-sink adapters are explicit. The audio core is a separately prepared package pinned to immutable source.
 
 No interactive account provider, authenticated parent key channel, native output, permit review, real spatial session or deployment is claimed. Test identity and E2EE payload-decoder adapters are explicit. Private plans and permit evidence stay at authorized endpoints; public listings disclose only the approved summary, time and admission state.
 

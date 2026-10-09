@@ -1,0 +1,7 @@
+# Browser draft workspace
+
+Run `npm run dev` after preparing the pinned core and installing dependencies. The browser workspace provides session planning, aligned mono WAV uploads, instrument placement, draft contributor positions, bounded three-second mix auditions and local private-evidence encryption. Keyboard-accessible forms, plain-text rendering and reduced-motion styling are included. The production build has a restrictive CSP and no remote credentials or plaintext local-storage path.
+
+Draft state lives in the browser tab and is deliberately separate from authenticated session operations. Uploaded stems are private local inputs; the draft audition's allow-source adapter authorizes local simulation only. Draft speakers do not represent verified physical output, and the page emits no operational facts or reward evidence. Saving changed conditions stops any pending audition. Publishing, real contributor enrollment, the authenticated manifest channel, device playback and actual Music Operations reports require connected services and verified roles; public activation stays unavailable in this workspace.
+
+Four built-bundle DOM tests cover saving/escaping, actual WAV parsing and placement, speaker removal, cancellation of delayed audio start and credential/plaintext-persistence absence. They use jsdom with explicit standard-Web-API and audio-sink adapters. These are software workflow checks, not actual browser/device or physical sound qualification. All 17 application tests pass locally and dependency audit reports zero advisories.

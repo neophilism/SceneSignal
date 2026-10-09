@@ -711,14 +711,14 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-01",
       "origin": "original",
-      "status": "merged",
+      "status": "implemented",
       "github_pr": 2,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
       "released": false,
       "partial": true,
-      "implementation_scope": "Endpoint session kernel, scoped role evaluator, private condition digest, encrypted evidence references and signed site-specific activation/expiry/cancellation. Interactive identity provisioning, permit upload/key-channel integration, consumer UI and native output qualification remain separate.",
+      "implementation_scope": "Endpoint session kernel, scoped role evaluator, private condition digest, encrypted evidence references and signed site-specific activation/expiry/cancellation. Interactive identity provisioning, permit upload/key-channel integration, consumer UI and native output qualification remain separate. Browser draft UI with plan forms, local aligned-WAV upload/placement/audition and private-evidence encryption. Remote identity, publishing and native/release qualification remain open.",
       "portable_integration_tested": true,
       "portable_integration_evidence": {
         "kind": "software-with-explicit-test-adapters",
@@ -769,14 +769,14 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-03",
       "origin": "original",
-      "status": "merged",
+      "status": "implemented",
       "github_pr": 2,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
       "released": false,
       "partial": true,
-      "implementation_scope": "Endpoint session kernel, scoped role evaluator, private condition digest, encrypted evidence references and signed site-specific activation/expiry/cancellation. Interactive identity provisioning, permit upload/key-channel integration, consumer UI and native output qualification remain separate.",
+      "implementation_scope": "Endpoint session kernel, scoped role evaluator, private condition digest, encrypted evidence references and signed site-specific activation/expiry/cancellation. Interactive identity provisioning, permit upload/key-channel integration, consumer UI and native output qualification remain separate. Browser draft UI with plan forms, local aligned-WAV upload/placement/audition and private-evidence encryption. Remote identity, publishing and native/release qualification remain open.",
       "portable_integration_tested": true,
       "portable_integration_evidence": {
         "kind": "software-with-explicit-test-adapters",
@@ -798,14 +798,14 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-04",
       "origin": "original",
-      "status": "merged",
+      "status": "implemented",
       "github_pr": 2,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
       "released": false,
       "partial": true,
-      "implementation_scope": "Endpoint session kernel, scoped role evaluator, private condition digest, encrypted evidence references and signed site-specific activation/expiry/cancellation. Interactive identity provisioning, permit upload/key-channel integration, consumer UI and native output qualification remain separate.",
+      "implementation_scope": "Endpoint session kernel, scoped role evaluator, private condition digest, encrypted evidence references and signed site-specific activation/expiry/cancellation. Interactive identity provisioning, permit upload/key-channel integration, consumer UI and native output qualification remain separate. Browser draft UI with plan forms, local aligned-WAV upload/placement/audition and private-evidence encryption. Remote identity, publishing and native/release qualification remain open.",
       "portable_integration_tested": true,
       "portable_integration_evidence": {
         "kind": "software-with-explicit-test-adapters",
@@ -958,8 +958,8 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-11",
       "origin": "original",
-      "status": "implemented",
-      "github_pr": null,
+      "status": "merged",
+      "github_pr": 3,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
@@ -971,7 +971,10 @@
         "kind": "software-with-explicit-test-adapters",
         "tests": "tests/spatial-workspace.test.ts",
         "fieldClaim": false
-      }
+      },
+      "github_prs": [
+        3
+      ]
     },
     {
       "id": "SS-12",
@@ -1002,8 +1005,8 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-13",
       "origin": "original",
-      "status": "implemented",
-      "github_pr": null,
+      "status": "merged",
+      "github_pr": 3,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
@@ -1015,7 +1018,10 @@
         "kind": "software-with-explicit-test-adapters",
         "tests": "tests/spatial-workspace.test.ts",
         "fieldClaim": false
-      }
+      },
+      "github_prs": [
+        3
+      ]
     },
     {
       "id": "SS-14",
@@ -1028,8 +1034,8 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-14",
       "origin": "original",
-      "status": "implemented",
-      "github_pr": null,
+      "status": "merged",
+      "github_pr": 3,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
@@ -1041,7 +1047,10 @@
         "kind": "software-with-explicit-test-adapters",
         "tests": "tests/spatial-workspace.test.ts",
         "fieldClaim": false
-      }
+      },
+      "github_prs": [
+        3
+      ]
     },
     {
       "id": "SS-15",
@@ -1075,19 +1084,22 @@
       "baseline_id": "EP-16",
       "origin": "original",
       "status": "implemented",
-      "github_pr": null,
+      "github_pr": 3,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
       "released": false,
       "partial": true,
-      "implementation_scope": "Endpoint contributor consent, fixed/tracked placement, scoped Spime bindings, rights-gated mix plans and actual bounded PCM auditions. Coordinate/route callbacks are trusted adapters, with no physical qualification. UI, local topology orchestration and native field playback remain open.",
+      "implementation_scope": "Endpoint contributor consent, fixed/tracked placement, scoped Spime bindings, rights-gated mix plans and actual bounded PCM auditions. Coordinate/route callbacks are trusted adapters, with no physical qualification. UI, local topology orchestration and native field playback remain open. Browser draft UI with plan forms, local aligned-WAV upload/placement/audition and private-evidence encryption. Remote identity, publishing and native/release qualification remain open.",
       "portable_integration_tested": true,
       "portable_integration_evidence": {
         "kind": "software-with-explicit-test-adapters",
         "tests": "tests/spatial-workspace.test.ts",
         "fieldClaim": false
-      }
+      },
+      "github_prs": [
+        3
+      ]
     },
     {
       "id": "SS-17",
@@ -1101,19 +1113,22 @@
       "baseline_id": "EP-17",
       "origin": "original",
       "status": "implemented",
-      "github_pr": null,
+      "github_pr": 3,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
       "released": false,
       "partial": true,
-      "implementation_scope": "Endpoint contributor consent, fixed/tracked placement, scoped Spime bindings, rights-gated mix plans and actual bounded PCM auditions. Coordinate/route callbacks are trusted adapters, with no physical qualification. UI, local topology orchestration and native field playback remain open.",
+      "implementation_scope": "Endpoint contributor consent, fixed/tracked placement, scoped Spime bindings, rights-gated mix plans and actual bounded PCM auditions. Coordinate/route callbacks are trusted adapters, with no physical qualification. UI, local topology orchestration and native field playback remain open. Browser draft UI with plan forms, local aligned-WAV upload/placement/audition and private-evidence encryption. Remote identity, publishing and native/release qualification remain open.",
       "portable_integration_tested": true,
       "portable_integration_evidence": {
         "kind": "software-with-explicit-test-adapters",
         "tests": "tests/spatial-workspace.test.ts",
         "fieldClaim": false
-      }
+      },
+      "github_prs": [
+        3
+      ]
     },
     {
       "id": "SS-18",
@@ -1129,8 +1144,8 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-18",
       "origin": "original",
-      "status": "implemented",
-      "github_pr": null,
+      "status": "merged",
+      "github_pr": 3,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
@@ -1142,7 +1157,10 @@
         "kind": "software-with-explicit-test-adapters",
         "tests": "tests/spatial-workspace.test.ts",
         "fieldClaim": false
-      }
+      },
+      "github_prs": [
+        3
+      ]
     },
     {
       "id": "SS-19",
@@ -1173,8 +1191,8 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-20",
       "origin": "original",
-      "status": "implemented",
-      "github_pr": null,
+      "status": "merged",
+      "github_pr": 3,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
@@ -1186,7 +1204,10 @@
         "kind": "software-with-explicit-test-adapters",
         "tests": "tests/spatial-workspace.test.ts",
         "fieldClaim": false
-      }
+      },
+      "github_prs": [
+        3
+      ]
     },
     {
       "id": "SS-21",
@@ -1201,8 +1222,8 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-21",
       "origin": "original",
-      "status": "implemented",
-      "github_pr": null,
+      "status": "merged",
+      "github_pr": 3,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
@@ -1214,7 +1235,10 @@
         "kind": "software-with-explicit-test-adapters",
         "tests": "tests/spatial-workspace.test.ts",
         "fieldClaim": false
-      }
+      },
+      "github_prs": [
+        3
+      ]
     },
     {
       "id": "SS-22",
@@ -1283,12 +1307,14 @@
       "gate": "Actual field evidence for hardware/production claims",
       "baseline_id": "EP-25",
       "origin": "original",
-      "status": "planned",
+      "status": "implemented",
       "github_pr": null,
       "deployed": false,
       "integration_tested": false,
       "field_validated": false,
-      "released": false
+      "released": false,
+      "partial": true,
+      "implementation_scope": " Browser draft UI with plan forms, local aligned-WAV upload/placement/audition and private-evidence encryption. Remote identity, publishing and native/release qualification remain open."
     },
     {
       "id": "SS-26",
@@ -2452,8 +2478,10 @@
     "field_validated": false,
     "independent_review": "pending",
     "scenesignal_implemented_roadmap_ids": 14,
-    "scenesignal_tests": 13,
+    "scenesignal_tests": 17,
     "scenesignal_production_deployed": false,
-    "scenesignal_merged_roadmap_ids": 6
+    "scenesignal_merged_roadmap_ids": 6,
+    "scenesignal_browser_build": true,
+    "scenesignal_browser_workflow_tests": 4
   }
 }
