@@ -39,7 +39,7 @@ export class SceneSession {
   revise(actor: SceneActor, plan: SitePlan, nowMs: number): void {
     this.time(nowMs); requireSceneRole(actor, this.value.scope, ['organizer'], nowMs); validatePlan(plan);
     invariant(this.value.state !== 'cancelled' && plan.revision === this.value.plan.revision + 1, 'SITE_REVISION_CONFLICT');
-    this.generation++; this.stopOutput('SITE_CHANGED'); this.value = { ...this.value, revision: this.value.revision + 1, plan: structuredClone(plan), state: 'planning', authorization: null, stopReason: 'SITE_CHANGED' };
+    this.generation++; this.value = { ...this.value, revision: this.value.revision + 1, plan: structuredClone(plan), state: 'planning', authorization: null, stopReason: 'SITE_CHANGED' }; this.stopOutput('SITE_CHANGED');
   }
   async authorize(actor: SceneActor, signed: SignedControl, verifier: ControlVerifier, decode: ControlPayloadDecoder, nowMs: number): Promise<void> {
     this.time(nowMs); requireSceneRole(actor, this.value.scope, ['organizer'], nowMs);
@@ -55,8 +55,9 @@ export class SceneSession {
     integer(a.validFromMs); integer(a.validUntilMs, a.validFromMs + 1); finite(a.maximumLinearGain, 0, plan.maximumLinearGain);
     invariant(a.siteId === plan.siteId && a.siteRevision === plan.revision && a.conditionsDigestHex === plan.conditionsDigestHex && a.authorizerId === actor.identityId, 'AUTHORIZATION_SITE_OR_ACTOR_MISMATCH');
     invariant(a.validFromMs <= plan.startsAtMs && a.validUntilMs >= plan.endsAtMs && a.validUntilMs > nowMs && body.expiresAtMs > nowMs, 'AUTHORIZATION_DOES_NOT_COVER_SESSION');
-    this.generation++; if (this.value.state === 'active') this.stopOutput('AUTHORIZATION_REPLACED');
+    this.generation++; const wasActive = this.value.state === 'active';
     this.value = { ...this.value, revision: this.value.revision + 1, state: 'authorized', authorization: a, stopReason: null };
+    if (wasActive) this.stopOutput('AUTHORIZATION_REPLACED');
   }
   activate(actor: SceneActor, nowMs: number): SessionSnapshot {
     this.time(nowMs); requireSceneRole(actor, this.value.scope, ['organizer','operator'], nowMs);
@@ -69,8 +70,9 @@ export class SceneSession {
     return this.snapshot();
   }
   private stopInternal(reason: string, cancelled: boolean): void {
-    this.generation++; this.stopOutput(reason); this.value.state = cancelled ? 'cancelled' : 'stopped'; this.value.revision++; this.value.stopReason = reason;
+    this.generation++; this.value.state = cancelled ? 'cancelled' : 'stopped'; this.value.revision++; this.value.stopReason = reason;
     if (cancelled) this.value.authorization = null;
+    this.stopOutput(reason);
   }
   stop(actor: SceneActor, nowMs: number, reason = 'OPERATOR_STOP'): void { this.time(nowMs); requireSceneRole(actor, this.value.scope, ['organizer','operator','steward'], nowMs); identifier(reason); this.stopInternal(reason, false); }
   cancel(actor: SceneActor, nowMs: number, reason = 'ORGANIZER_CANCELLED'): void { this.time(nowMs); requireSceneRole(actor, this.value.scope, ['organizer'], nowMs); identifier(reason); this.stopInternal(reason, true); }

@@ -42,3 +42,8 @@ test('public discovery omits private condition hashes, encrypted permit referenc
   const f=await fixture();const listing=f.session.publicListing(1000);assert.equal(listing.freeAdmission,true);assert.equal('authorization' in listing,false);assert.equal('conditionsDigestHex' in listing,false);assert.equal('siteId' in listing,false);
   assert.equal(await privateConditionsDigest({b:2,a:1}),await privateConditionsDigest({a:1,b:2}));
 });
+test('failed stop callbacks cannot keep a cancelled or revised session authorized',()=>{
+  const session=new SceneSession(scope,plan,()=>{throw new Error('native sink failed');});
+  assert.throws(()=>session.revise(actor,{...plan,revision:2},1000));assert.equal(session.snapshot().state,'planning');assert.equal(session.snapshot().plan.revision,2);
+  assert.throws(()=>session.cancel(actor,1001));assert.equal(session.snapshot().state,'cancelled');assert.equal(session.snapshot().authorization,null);
+});
