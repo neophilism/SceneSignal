@@ -1,10 +1,41 @@
 {
-  "name": "@neophilism/scenesignal", "version": "0.1.0-dev", "private": true, "type": "module",
+  "name": "@neophilism/scenesignal",
+  "version": "0.1.0-dev",
+  "private": true,
+  "type": "module",
   "description": "Endpoint-owned community spatial music sessions",
-  "engines": { "node": ">=24.19.0 <25" },
-  "exports": { ".": { "types": "./dist/src/index.d.ts", "import": "./dist/src/index.js" } },
-  "files": ["dist/src", "src", "docs", "README.md"],
-  "scripts": { "core:prepare": "node scripts/prepare-core.mjs", "typecheck": "tsc --noEmit", "build": "tsc", "test": "npm run build && node --test dist/tests/*.test.js", "roadmap:check": "node scripts/check-roadmap.mjs", "check": "npm run typecheck && npm run roadmap:check && npm test" },
-  "dependencies": { "@neophilism/distributed-audio-engine": "file:.deps/audio-core.tgz" },
-  "devDependencies": { "@types/node": "24.19.2", "typescript": "7.0.2" }
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "files": [
+    "dist/src",
+    "src",
+    "docs",
+    "README.md"
+  ],
+  "scripts": {
+    "core:prepare": "node scripts/prepare-core.mjs",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc && vite build",
+    "test": "npm run build && node --test dist/tests/*.test.js tests/*.test.mjs",
+    "roadmap:check": "node scripts/check-roadmap.mjs",
+    "check": "npm run typecheck && npm run roadmap:check && npm test",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@neophilism/distributed-audio-engine": "file:.deps/audio-core.tgz"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2",
+    "vite": "6.4.4",
+    "jsdom": "26.1.0"
+  }
 }
