@@ -1,0 +1,15 @@
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { readFile, mkdir, rename } from 'node:fs/promises';
+import { resolve } from 'node:path';
+const run = promisify(execFile), pin = JSON.parse(await readFile('dependency-pin.json', 'utf8'));
+if (pin.repository !== 'neophilism/Distributed-Audio-Engine' || !/^[0-9a-f]{40}$/.test(pin.commit)) throw new Error('INVALID_CORE_PIN');
+const source = resolve('.build/audio-core'); await mkdir(source, { recursive: true }); await mkdir('.deps', { recursive: true });
+await run('git', ['init', source]);
+await run('git', ['-C', source, 'fetch', '--depth=1', 'https://github.com/' + pin.repository + '.git', pin.commit]);
+await run('git', ['-C', source, 'checkout', '--detach', 'FETCH_HEAD']);
+const { stdout: revision } = await run('git', ['-C', source, 'rev-parse', 'HEAD']); if (revision.trim() !== pin.commit) throw new Error('CORE_PIN_MISMATCH');
+await run('npm', ['ci', '--ignore-scripts'], { cwd: source }); await run('npm', ['run', 'build'], { cwd: source });
+const { stdout } = await run('npm', ['pack', '--ignore-scripts', '--json', '--pack-destination', resolve('.deps')], { cwd: source });
+const [packed] = JSON.parse(stdout); await rename(resolve('.deps', packed.filename), resolve('.deps/audio-core.tgz'));
+console.log('Prepared pinned audio core ' + pin.commit);

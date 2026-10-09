@@ -1,17 +1,9 @@
 # SceneSignal
 
-# Four-project development plan
+Community spatial music sessions, built directly on Distributed Audio Engine. No dependency on Distributed Radio Engine or TrackZero.
 
-120 planned work packages: 34 Distributed Audio Engine, 32 SceneSignal, 28 Distributed Radio Engine, 26 TrackZero. The original 88-package baseline remains mapped separately; 32 work packages were added. These are roadmap identifiers, not GitHub PR numbers.
+The first application implementation supplies an endpoint-owned session lifecycle: scoped organizer/operator/steward roles, site and condition revisions, signed permit or organizer-assertion decisions, current-time activation, automatic expiry, cancellation and minimized free-admission listings. [Session lifecycle](docs/session-lifecycle.md) · [Implementation and evidence](docs/implementation-status.md) · [Development plan](docs/scenesignal-development-plan.md)
 
-Build order requested by the owner: Distributed Audio Engine, SceneSignal, Distributed Radio Engine, TrackZero. The radio engine does not depend on SceneSignal; build order is not an architectural coupling.
+Use Node 24.19.0. Run `npm run core:prepare` to fetch/build the immutable source pinned in dependency-pin.json, then `npm ci --ignore-scripts` and `npm run check`. The prepared dependency archive is ignored by Git; CI reproduces it from the pinned source. Private manifests, keys and media never belong in that archive or repository.
 
-Distributed Audio Engine owns neutral encrypted media, device/timing evidence, generic timelines, spatial rendering, scoped controls and reusable commerce/entitlement primitives. SceneSignal consumes it directly. Distributed Radio Engine also consumes it and owns general radio programming, contribution economics, creator-specific wallets and free bonus releases. TrackZero consumes Distributed Radio Engine and supplies consumer/creator experiences.
-
-No organizer event rules or radio-product reward rules belong in the audio core. SceneSignal requires permit evidence or a specific no-permit-required attestation for activated public sessions. TrackZero and the radio engine require no venue, attendance, scheduled gathering or artist proximity.
-
-A **Spime** is a Bluetooth-enabled physical instrument anchor in SceneSignal: its validated location controls a virtual source such as the strings section. Phone, speaker and Spime locations are separate.
-
-All projects adopt the pinned End To End Everywhere architecture as their default. TLS and server disk encryption supplement endpoint encryption; they never substitute for it. Production assurance, native-device and field qualification are evidence gates distinct from merging development code.
-
-Implementation begins after the preceding stage. [Development plan](docs/scenesignal-development-plan.md).
+The library accepts trusted identity and authenticated E2EE channel adapters. It does not supply a fallback account or key protocol. Current software checks use explicit test adapters; native output enforcement, real permit/authorization operations, hardware pilots, deployed recovery and independent review remain release requirements. Development continues in the four-repository order recorded in the roadmap.
