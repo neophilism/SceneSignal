@@ -1,0 +1,26 @@
+name: SceneSignal CI candidate to Engine Room
+on:
+  workflow_run:
+    workflows: [SceneSignal CI]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  report:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - run: node scripts/report-ci-engine-room.mjs
+        env:
+          SCENESIGNAL_COMMIT_SHA: ${{ github.event.workflow_run.head_sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          ENGINE_ROOM_TELEMETRY_URL: ${{ secrets.ENGINE_ROOM_TELEMETRY_URL }}
+          ENGINE_ROOM_TELEMETRY_KEY_ID: ${{ secrets.ENGINE_ROOM_TELEMETRY_KEY_ID }}
+          ENGINE_ROOM_TELEMETRY_SECRET: ${{ secrets.ENGINE_ROOM_TELEMETRY_SECRET }}
