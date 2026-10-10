@@ -1,0 +1,22 @@
+# Public draft-only workspace. This is NOT an operational concert, permits API, or production audio service.
+services:
+  - type: web
+    runtime: static
+    name: scenesignal-draft-preview
+    repo: https://github.com/neophilism/SceneSignal
+    branch: main
+    buildCommand: npm run core:prepare && npm ci --ignore-scripts && npm run check
+    staticPublishPath: web-dist
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: Referrer-Policy
+        value: no-referrer
