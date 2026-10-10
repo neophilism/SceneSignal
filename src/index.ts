@@ -4,3 +4,4 @@ export * from './private-evidence.js';
 export * from './lineup.js';
 export * from './discovery.js';
 export * from './sponsorship.js';
+export * from './site-coordinator.js';
