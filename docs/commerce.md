@@ -1,0 +1,5 @@
+# SS-10 album commerce kernel
+
+Offers full-album products and voluntary-support payment intents. No individual track checkout is presented as a complete album. Paid purchases exist only after an independently trusted payment verifier returns an exact-scoped verified receipt; browser callbacks, pending intents and fabricated payment confirmation cannot grant fulfillment. Prevent duplicate purchase identifiers and provider transaction replay. Public album listings omit artist revenue splits and private rights references.
+
+This is not a payment processor, storefront UI, distribution-rights validator, tax engine, verified settlement exporter or encrypted persistent ledger. Actual fulfillment and payouts require separately reviewed payment provider integration, account and rights checks, idempotent transactions, provider event verification, refund handling, E2EE private records and consumer disclosures. Never send provider credentials to a browser, and do not release protected album keys from this kernel alone.
