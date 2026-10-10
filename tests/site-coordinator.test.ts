@@ -8,7 +8,7 @@ import type { ControlBody, CoordinatorLease } from '@neophilism/distributed-audi
 const scope={tenantId:'label',application:'scenesignal' as const,sessionId:'concert'};
 const plan:SitePlan={siteId:'site',revision:1,conditionsDigestHex:'a'.repeat(64),startsAtMs:5000,endsAtMs:15000,maximumLinearGain:0.4,publicSummary:'Public concert'};
 const actor:SceneActor={tenantId:'label',sessionId:'concert',identityId:'host',roles:['organizer'],expiresAtMs:25000};
-const request={tenantId:'label',application:'scenesignal' as const,storageObjectId:'object',chunkIndex:0,expectedBytes:8};
+const request={tenantId:'label',application:'scenesignal' as const,storageObjectId:'object',chunkIndex:0,expectedBytes:20};
 
 async function fixture(decoder?: (body: ControlBody)=>Promise<CoordinatorLease>) {
   const keys=await createControlSigningKey();
@@ -18,8 +18,8 @@ async function fixture(decoder?: (body: ControlBody)=>Promise<CoordinatorLease>)
   const session=new SceneSession(scope,plan,()=>{});
   let now=1000, local=0, fallback=0;
   const coordinator=new SceneSiteCoordinator(session,'program',verifier,decoder??(async()=>lease),
-    new Map([['local',{async read(){local++;return new Uint8Array(8).fill(1);}}]]),
-    {async read(){fallback++;return new Uint8Array(8).fill(2);}},
+    new Map([['local',{async read(){local++;return new Uint8Array(20).fill(1);}}]]),
+    {async read(){fallback++;return new Uint8Array(20).fill(2);}},
     {nowUnixMs:()=>now});
   return {coordinator,session,keys,body,lease,setNow:(n:number)=>{now=n;},counts:()=>({local,fallback})};
 }
