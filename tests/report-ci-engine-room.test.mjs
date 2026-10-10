@@ -12,7 +12,10 @@ test('candidate telemetry describes a source revision, never a live release or u
     records: [{ kind: 'release', key: 'scenesignal-source-' + sha, commitSha: sha }]
   });
   assert.throws(() => candidateEnvelope('not-a-commit'));
-  assert.doesNotMatch(JSON.stringify(candidateEnvelope(sha)), /live|availability|fieldValidated|approved/);
+  const record = candidateEnvelope(sha).records[0];
+  assert.deepEqual(Object.keys(record).sort(), ['commitSha', 'key', 'kind']);
+  assert.equal(Object.hasOwn(record, 'event'), false);
+  assert.equal(Object.hasOwn(record, 'metric'), false);
 });
 test('Engine Room signature covers exact timestamp and bytes', () => {
   const body = JSON.stringify(candidateEnvelope(sha));
