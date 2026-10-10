@@ -60,7 +60,8 @@ test('invalid plan, topology change and clock rollback fail closed',()=>{
   const t=new SceneSpeakerTransition(1000);
   assert.throws(()=>t.setTarget(plan({a:0.8},{a:0.2}),1000));
   t.setTarget(plan({a:0.2}),1000);
-  assert.throws(()=>t.setTarget({...plan({a:0.2}),sourceIds:['different']},1100),/SCENE_SOURCE_TOPOLOGY_CHANGED/);
+  const changed=plan({a:0.2});changed.sourceIds=['different'];changed.gains.a={different:0.2};
+  assert.throws(()=>t.setTarget(changed,1100),/SCENE_SOURCE_TOPOLOGY_CHANGED/);
   assert.throws(()=>t.at(999));
   assert.throws(()=>t.setTarget(plan({a:0.2,b:0.9}),1200));
   t.clear();
