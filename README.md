@@ -1,5 +1,7 @@
 # SceneSignal
 
+**Development and handoff plan:** [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md).
+
 Community spatial music sessions, built directly on Distributed Audio Engine. No dependency on Distributed Radio Engine or TrackZero.
 
 The first application implementation supplies an endpoint-owned session lifecycle: scoped organizer/operator/steward roles, site and condition revisions, signed permit or organizer-assertion decisions, current-time activation, automatic expiry, cancellation and minimized free-admission listings. [Session lifecycle](docs/session-lifecycle.md) · [Implementation and evidence](docs/implementation-status.md) · [Development plan](docs/scenesignal-development-plan.md)
