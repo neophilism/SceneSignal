@@ -1,0 +1,20 @@
+project:
+  name: SceneSignal
+  display_name: SceneSignal
+  repository: neophilism/SceneSignal
+  status: active-development
+
+roadmap:
+  version: 1
+  planned_prs: 16
+  approved: true
+
+milestones:
+  - name: Specifications and foundations
+    prs: 4
+  - name: Artist discovery and commerce
+    prs: 4
+  - name: Spatial hardware and operations
+    prs: 4
+  - name: Rewards safety and field release
+    prs: 4
