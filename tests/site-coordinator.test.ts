@@ -2,7 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { SceneSession, SceneSiteCoordinator } from '../src/index.js';
 import { ControlVerifier, MemoryCheckpointStore, createControlSigningKey, signControl } from '@neophilism/distributed-audio-engine';
-import type { ControlBody, CoordinatorLease, SceneActor, SitePlan } from '../src/index.js';
+import type { SceneActor, SitePlan } from '../src/index.js';
+import type { ControlBody, CoordinatorLease } from '@neophilism/distributed-audio-engine';
 
 const scope={tenantId:'label',application:'scenesignal' as const,sessionId:'concert'};
 const plan:SitePlan={siteId:'site',revision:1,conditionsDigestHex:'a'.repeat(64),startsAtMs:5000,endsAtMs:15000,maximumLinearGain:0.4,publicSummary:'Public concert'};
