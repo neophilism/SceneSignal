@@ -2510,5 +2510,7 @@
     "scenesignal_merged_roadmap_ids": 9,
     "scenesignal_browser_build": true,
     "scenesignal_browser_workflow_tests": 4
-  }
+  },
+  "_canonicalRoadmap": "registry/roadmap.json",
+  "_canonicalRoadmapNotice": "Historical multi-repository planning snapshot; edit the local registry/roadmap.json for this repository's PR work total and mappings."
 }
