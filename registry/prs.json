@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "repository": "neophilism/SceneSignal",
+  "roadmapVersion": 1,
+  "planVerified": true,
+  "plannedPrCount": 32,
+  "observedAt": "2026-10-11T17:40:57.644Z",
+  "units": [
+    {
+      "id": "SS-01",
+      "title": "Repository and application shell",
+      "origin": "original",
+      "prs": [
+        2
+      ]
+    },
+    {
+      "id": "SS-02",
+      "title": "Organizer and collaborator roles",
+      "origin": "original",
+      "prs": [
+        2
+      ]
+    },
+    {
+      "id": "SS-03",
+      "title": "Site and session planning",
+      "origin": "original",
+      "prs": [
+        2
+      ]
+    },
+    {
+      "id": "SS-04",
+      "title": "Permit evidence upload",
+      "origin": "original",
+      "prs": [
+        2
+      ]
+    },
+    {
+      "id": "SS-05",
+      "title": "No-permit-required attestation",
+      "origin": "original",
+      "prs": [
+        2
+      ]
+    },
+    {
+      "id": "SS-06",
+      "title": "Authorization lifecycle and enforcement",
+      "origin": "original",
+      "prs": [
+        2
+      ]
+    },
+    {
+      "id": "SS-07",
+      "title": "Artist calls and lineup agreements",
+      "origin": "original",
+      "prs": [
+        5
+      ]
+    },
+    {
+      "id": "SS-08",
+      "title": "Free event discovery and visitor pages",
+      "origin": "original",
+      "prs": [
+        6
+      ]
+    },
+    {
+      "id": "SS-09",
+      "title": "Session sponsorship",
+      "origin": "original",
+      "prs": [
+        8
+      ]
+    },
+    {
+      "id": "SS-10",
+      "title": "Artist album sales and optional support",
+      "origin": "original",
+      "prs": [
+        10
+      ]
+    },
+    {
+      "id": "SS-11",
+      "title": "Speaker-contributor onboarding",
+      "origin": "original",
+      "prs": [
+        3
+      ]
+    },
+    {
+      "id": "SS-12",
+      "title": "Local coordinator and site setup",
+      "origin": "original",
+      "prs": [
+        12
+      ]
+    },
+    {
+      "id": "SS-13",
+      "title": "Fixed-speaker placement map",
+      "origin": "original",
+      "prs": [
+        3
+      ]
+    },
+    {
+      "id": "SS-14",
+      "title": "Speaker roles and calibration",
+      "origin": "original",
+      "prs": [
+        3
+      ]
+    },
+    {
+      "id": "SS-15",
+      "title": "Stem and composition ingestion",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-16",
+      "title": "Spatial scene composer",
+      "origin": "original",
+      "prs": [
+        3
+      ]
+    },
+    {
+      "id": "SS-17",
+      "title": "Scene audition and simulation",
+      "origin": "original",
+      "prs": [
+        3
+      ]
+    },
+    {
+      "id": "SS-18",
+      "title": "Static spatial field playback",
+      "origin": "original",
+      "prs": [
+        3
+      ]
+    },
+    {
+      "id": "SS-19",
+      "title": "Dynamic density and contributor changes",
+      "origin": "original",
+      "prs": [
+        13
+      ]
+    },
+    {
+      "id": "SS-20",
+      "title": "Moving-speaker position tracking",
+      "origin": "original",
+      "prs": [
+        3
+      ]
+    },
+    {
+      "id": "SS-21",
+      "title": "Spimes: movable physical instrument anchors",
+      "origin": "original",
+      "prs": [
+        3
+      ]
+    },
+    {
+      "id": "SS-22",
+      "title": "Preprogrammed spatial automation",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-23",
+      "title": "Live scene control and operator handoff",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-24",
+      "title": "Session contribution rewards",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-25",
+      "title": "Accessibility and equitable participation",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-26",
+      "title": "Acoustic monitoring and emergency controls",
+      "origin": "original",
+      "prs": [
+        14
+      ]
+    },
+    {
+      "id": "SS-27",
+      "title": "Weather, access and site operations",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-28",
+      "title": "Optional live-performance audio",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-29",
+      "title": "Session settlement and impact reporting",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-30",
+      "title": "Controlled 10–20-speaker pilot",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-31",
+      "title": "Larger deployment qualification",
+      "origin": "original",
+      "prs": []
+    },
+    {
+      "id": "SS-32",
+      "title": "Public release and producer runbooks",
+      "origin": "original",
+      "prs": []
+    }
+  ],
+  "pullRequests": [
+    {
+      "id": 4807543405,
+      "number": 16,
+      "title": "Automatically merge fresh green owner PRs without bypassing reviews or field gates",
+      "url": "https://github.com/neophilism/SceneSignal/pull/16",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-10T01:04:43.000Z",
+      "updatedAt": "2026-10-10T01:04:43.000Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "76ccefddda4ea34c4c7fa97107d66e01ac7ac7be",
+      "baseRef": "main",
+      "mergeCommitSha": "d005c9cc391ef603adfd0d98a1b2188eafdd048d"
+    },
+    {
+      "id": 4807512619,
+      "number": 15,
+      "title": "Deploy draft-only SceneSignal preview via GitHub Pages without Render",
+      "url": "https://github.com/neophilism/SceneSignal/pull/15",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-10T01:00:27.000Z",
+      "updatedAt": "2026-10-10T01:00:27.000Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "fa54656331e25241a3b23ff91aad8941f81acfbc",
+      "baseRef": "main",
+      "mergeCommitSha": "613d37860f9790f79b843b42fe1037f4a8394752"
+    },
+    {
+      "id": 4807503009,
+      "number": 14,
+      "title": "SS-26: Add signed acoustic monitoring and persistent emergency-stop safety gates",
+      "url": "https://github.com/neophilism/SceneSignal/pull/14",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-10T00:58:59.000Z",
+      "updatedAt": "2026-10-10T00:58:59.000Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "d8177ce7ada944dbefe2801fbb86cb00292a539a",
+      "baseRef": "main",
+      "mergeCommitSha": null
+    },
+    {
+      "id": 4807482093,
+      "number": 13,
+      "title": "SS-19: Fade speaker topology changes without routing to departed outputs",
+      "url": "https://github.com/neophilism/SceneSignal/pull/13",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-10T00:56:04.000Z",
+      "updatedAt": "2026-10-10T00:56:04.000Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "0ce7783941b55b6c5e3e54f6c7ef37b5b6e01cfb",
+      "baseRef": "main",
+      "mergeCommitSha": null
+    },
+    {
+      "id": 4807471059,
+      "number": 12,
+      "title": "SS-12: Scope signed local ciphertext coordination to the authorized site",
+      "url": "https://github.com/neophilism/SceneSignal/pull/12",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T00:54:12.000Z",
+      "updatedAt": "2026-10-10T01:05:00.000Z",
+      "closedAt": "2026-10-10T01:05:00.000Z",
+      "mergedAt": "2026-10-10T01:05:00.000Z",
+      "headSha": "f5a42a7a7569dc2fef3dd9277566da29cf415c0f",
+      "baseRef": "main",
+      "mergeCommitSha": "208f035e8ec5eda19a7493ad3f394f6da6b88444"
+    },
+    {
+      "id": 4807458407,
+      "number": 11,
+      "title": "Add signed CI candidate telemetry to Engine Room (opt-in, fail-closed)",
+      "url": "https://github.com/neophilism/SceneSignal/pull/11",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-10-10T00:52:07.000Z",
+      "updatedAt": "2026-10-10T01:06:09.000Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "2fd5753590f4b9e4bce9657ecb076c3e1c6d1e0c",
+      "baseRef": "main",
+      "mergeCommitSha": "3344cc292f24f58ab7618ece8cbe93b705b4853f"
+    },
+    {
+      "id": 4807453990,
+      "number": 10,
+      "title": "SS-10: Whole-album and voluntary support payment-intent kernel",
+      "url": "https://github.com/neophilism/SceneSignal/pull/10",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T00:51:14.000Z",
+      "updatedAt": "2026-10-11T06:15:48.000Z",
+      "closedAt": "2026-10-11T06:15:48.000Z",
+      "mergedAt": "2026-10-11T06:15:48.000Z",
+      "headSha": "00ce61bd9a51071a747ef3dbf1c7db33837bf2e9",
+      "baseRef": "main",
+      "mergeCommitSha": "7a9d59e18f762eff1e52545787a33d8efeea0016"
+    },
+    {
+      "id": 4807440617,
+      "number": 9,
+      "title": "Prepare verified Render deployment for SceneSignal's public draft workspace",
+      "url": "https://github.com/neophilism/SceneSignal/pull/9",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T00:48:59.000Z",
+      "updatedAt": "2026-10-10T00:57:11.000Z",
+      "closedAt": "2026-10-10T00:57:11.000Z",
+      "mergedAt": "2026-10-10T00:57:11.000Z",
+      "headSha": "4968620e04c87ffdb6db5efd56e1ce6403fbc1b8",
+      "baseRef": "main",
+      "mergeCommitSha": "c8b3bde8c711f5649b3f9a17b78d0f938b2c630a"
+    },
+    {
+      "id": 4807435615,
+      "number": 8,
+      "title": "SS-09: Private sponsor commitments and consented public credits",
+      "url": "https://github.com/neophilism/SceneSignal/pull/8",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T00:48:07.000Z",
+      "updatedAt": "2026-10-10T00:54:29.000Z",
+      "closedAt": "2026-10-10T00:54:28.000Z",
+      "mergedAt": "2026-10-10T00:54:28.000Z",
+      "headSha": "c867823b6d18fc45c81b6bb46b5295e82efa6476",
+      "baseRef": "main",
+      "mergeCommitSha": "8d2c4709c70cad0a828106a1ba474eb347979ac0"
+    },
+    {
+      "id": 4807432848,
+      "number": 7,
+      "title": "Register SceneSignal's approved delivery plan for Engine Room monitoring",
+      "url": "https://github.com/neophilism/SceneSignal/pull/7",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T00:47:35.000Z",
+      "updatedAt": "2026-10-10T00:49:11.000Z",
+      "closedAt": "2026-10-10T00:49:11.000Z",
+      "mergedAt": "2026-10-10T00:49:11.000Z",
+      "headSha": "d7b6cca9047d94f4731f90b832043ed163147fa0",
+      "baseRef": "main",
+      "mergeCommitSha": "5492f5d25220121c9a0eb63ba4fa3340f2d37fc3"
+    },
+    {
+      "id": 4807427487,
+      "number": 6,
+      "title": "SS-08: Role-gated public session discovery with private-field minimization",
+      "url": "https://github.com/neophilism/SceneSignal/pull/6",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T00:46:42.000Z",
+      "updatedAt": "2026-10-10T00:47:26.000Z",
+      "closedAt": "2026-10-10T00:47:26.000Z",
+      "mergedAt": "2026-10-10T00:47:26.000Z",
+      "headSha": "7a18aaaad81163a59a16a3310f11d09b2cbb4b88",
+      "baseRef": "main",
+      "mergeCommitSha": "52b992d8a876bff67ff2430c7c43a8e927614865"
+    },
+    {
+      "id": 4807421186,
+      "number": 5,
+      "title": "SS-07: Secure artist calls, performer applications and lineup agreements",
+      "url": "https://github.com/neophilism/SceneSignal/pull/5",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-10T00:45:33.000Z",
+      "updatedAt": "2026-10-10T00:46:01.000Z",
+      "closedAt": "2026-10-10T00:46:00.000Z",
+      "mergedAt": "2026-10-10T00:46:00.000Z",
+      "headSha": "bcafaf546c8e9456ec15fc1888fd549752b3ba8a",
+      "baseRef": "main",
+      "mergeCommitSha": "5125895045d79d6854247b629a7c8b6dc80177ec"
+    },
+    {
+      "id": 4806858266,
+      "number": 4,
+      "title": "Build session planning, stem placement and spatial audition workspace",
+      "url": "https://github.com/neophilism/SceneSignal/pull/4",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-09T23:13:49.000Z",
+      "updatedAt": "2026-10-09T23:23:17.000Z",
+      "closedAt": "2026-10-09T23:23:16.000Z",
+      "mergedAt": "2026-10-09T23:23:16.000Z",
+      "headSha": "d7bcc055f8858270f7da2ce3135e686ed5e72887",
+      "baseRef": "main",
+      "mergeCommitSha": "76aff93bec510d300bf8d9f839f5623e0210b949"
+    },
+    {
+      "id": 4806764846,
+      "number": 3,
+      "title": "Add speaker consent, Spime tracking and endpoint-encrypted permit uploads",
+      "url": "https://github.com/neophilism/SceneSignal/pull/3",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-09T22:59:28.000Z",
+      "updatedAt": "2026-10-09T23:05:28.000Z",
+      "closedAt": "2026-10-09T23:05:28.000Z",
+      "mergedAt": "2026-10-09T23:05:27.000Z",
+      "headSha": "ced8e9b6437e4e8fabdd1f7b568c1b26b551018e",
+      "baseRef": "main",
+      "mergeCommitSha": "7559f259887506851ca2289d7440cb518af3e9cc"
+    },
+    {
+      "id": 4806711445,
+      "number": 2,
+      "title": "Build scoped session planning and signed site authorization",
+      "url": "https://github.com/neophilism/SceneSignal/pull/2",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-09T22:52:05.000Z",
+      "updatedAt": "2026-10-09T22:57:23.000Z",
+      "closedAt": "2026-10-09T22:57:22.000Z",
+      "mergedAt": "2026-10-09T22:57:22.000Z",
+      "headSha": "245fc2c24cf12d877c6f99ddffd35f0db0f44d3b",
+      "baseRef": "main",
+      "mergeCommitSha": "fb5d46d8d5b7169e1ac0942848928f30ac4993f6"
+    },
+    {
+      "id": 4805775235,
+      "number": 1,
+      "title": "SceneSignal: specification, E2EESA policy and revised development plan",
+      "url": "https://github.com/neophilism/SceneSignal/pull/1",
+      "state": "closed",
+      "draft": false,
+      "createdAt": "2026-10-09T20:56:13.000Z",
+      "updatedAt": "2026-10-09T20:58:59.000Z",
+      "closedAt": "2026-10-09T20:58:59.000Z",
+      "mergedAt": "2026-10-09T20:58:59.000Z",
+      "headSha": "a0611b6aea1fb6a4467648673543fec4e79b6df6",
+      "baseRef": "main",
+      "mergeCommitSha": "45db973007327b4ef76dfc9edf97a69f740d37b2"
+    }
+  ]
+}
