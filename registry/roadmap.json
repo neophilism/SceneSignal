@@ -1,0 +1,225 @@
+{
+  "repository": "neophilism/SceneSignal",
+  "title": "SceneSignal",
+  "version": 1,
+  "planVerified": true,
+  "plannedPrCount": 32,
+  "sourceFiles": [
+    "docs/roadmap.json",
+    "docs/DEVELOPMENT_PLAN.md"
+  ],
+  "scopeNote": "Units filtered by this repository prefix from the multi-repository shared roadmap. Other repository units are not counted here.",
+  "milestones": [
+    {
+      "id": "SS-01",
+      "title": "Repository and application shell",
+      "origin": "original",
+      "pullRequests": [
+        2
+      ]
+    },
+    {
+      "id": "SS-02",
+      "title": "Organizer and collaborator roles",
+      "origin": "original",
+      "pullRequests": [
+        2
+      ]
+    },
+    {
+      "id": "SS-03",
+      "title": "Site and session planning",
+      "origin": "original",
+      "pullRequests": [
+        2
+      ]
+    },
+    {
+      "id": "SS-04",
+      "title": "Permit evidence upload",
+      "origin": "original",
+      "pullRequests": [
+        2
+      ]
+    },
+    {
+      "id": "SS-05",
+      "title": "No-permit-required attestation",
+      "origin": "original",
+      "pullRequests": [
+        2
+      ]
+    },
+    {
+      "id": "SS-06",
+      "title": "Authorization lifecycle and enforcement",
+      "origin": "original",
+      "pullRequests": [
+        2
+      ]
+    },
+    {
+      "id": "SS-07",
+      "title": "Artist calls and lineup agreements",
+      "origin": "original",
+      "pullRequests": [
+        5
+      ]
+    },
+    {
+      "id": "SS-08",
+      "title": "Free event discovery and visitor pages",
+      "origin": "original",
+      "pullRequests": [
+        6
+      ]
+    },
+    {
+      "id": "SS-09",
+      "title": "Session sponsorship",
+      "origin": "original",
+      "pullRequests": [
+        8
+      ]
+    },
+    {
+      "id": "SS-10",
+      "title": "Artist album sales and optional support",
+      "origin": "original"
+    },
+    {
+      "id": "SS-11",
+      "title": "Speaker-contributor onboarding",
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
+    },
+    {
+      "id": "SS-12",
+      "title": "Local coordinator and site setup",
+      "origin": "original"
+    },
+    {
+      "id": "SS-13",
+      "title": "Fixed-speaker placement map",
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
+    },
+    {
+      "id": "SS-14",
+      "title": "Speaker roles and calibration",
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
+    },
+    {
+      "id": "SS-15",
+      "title": "Stem and composition ingestion",
+      "origin": "original"
+    },
+    {
+      "id": "SS-16",
+      "title": "Spatial scene composer",
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
+    },
+    {
+      "id": "SS-17",
+      "title": "Scene audition and simulation",
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
+    },
+    {
+      "id": "SS-18",
+      "title": "Static spatial field playback",
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
+    },
+    {
+      "id": "SS-19",
+      "title": "Dynamic density and contributor changes",
+      "origin": "original"
+    },
+    {
+      "id": "SS-20",
+      "title": "Moving-speaker position tracking",
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
+    },
+    {
+      "id": "SS-21",
+      "title": "Spimes: movable physical instrument anchors",
+      "origin": "original",
+      "pullRequests": [
+        3
+      ]
+    },
+    {
+      "id": "SS-22",
+      "title": "Preprogrammed spatial automation",
+      "origin": "original"
+    },
+    {
+      "id": "SS-23",
+      "title": "Live scene control and operator handoff",
+      "origin": "original"
+    },
+    {
+      "id": "SS-24",
+      "title": "Session contribution rewards",
+      "origin": "original"
+    },
+    {
+      "id": "SS-25",
+      "title": "Accessibility and equitable participation",
+      "origin": "original"
+    },
+    {
+      "id": "SS-26",
+      "title": "Acoustic monitoring and emergency controls",
+      "origin": "original"
+    },
+    {
+      "id": "SS-27",
+      "title": "Weather, access and site operations",
+      "origin": "original"
+    },
+    {
+      "id": "SS-28",
+      "title": "Optional live-performance audio",
+      "origin": "original"
+    },
+    {
+      "id": "SS-29",
+      "title": "Session settlement and impact reporting",
+      "origin": "original"
+    },
+    {
+      "id": "SS-30",
+      "title": "Controlled 10–20-speaker pilot",
+      "origin": "original"
+    },
+    {
+      "id": "SS-31",
+      "title": "Larger deployment qualification",
+      "origin": "original"
+    },
+    {
+      "id": "SS-32",
+      "title": "Public release and producer runbooks",
+      "origin": "original"
+    }
+  ]
+}
