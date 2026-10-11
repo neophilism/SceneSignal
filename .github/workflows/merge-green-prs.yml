@@ -1,0 +1,30 @@
+name: Merge verified owner PRs
+on:
+  workflow_run:
+    workflows: [SceneSignal CI, Planning CI]
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: scenesignal-trusted-pr-merger
+  cancel-in-progress: false
+jobs:
+  merge:
+    if: github.repository == 'neophilism/SceneSignal' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - name: Merge only verified fresh owner-authored development PRs
+        run: node scripts/merge-green-prs.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
