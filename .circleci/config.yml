@@ -1,0 +1,36 @@
+version: 2.1
+
+# Retains SceneSignal application checks, roadmap plan, dependency auditing.
+jobs:
+  complete-ci:
+    docker:
+      - image: cimg/node:24.19.0
+    resource_class: large
+    steps:
+      - checkout
+      - run:
+          name: Prepare pinned core from existing toolchain
+          command: npm run core:prepare
+      - run:
+          name: Install locked packages with no dependency scripts
+          command: npm ci --ignore-scripts
+      - run:
+          name: Typecheck, roadmap contracts, full unit tests and build
+          command: npm run check
+      - run:
+          name: Audit moderate and higher dependency vulnerabilities
+          command: npm audit --audit-level=moderate
+  planning-check:
+    docker:
+      - image: cimg/node:24.19.0
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Validate exact approved roadmap
+          command: node scripts/check-roadmap.mjs
+workflows:
+  all-required-checks:
+    jobs:
+      - complete-ci
+      - planning-check
