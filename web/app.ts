@@ -47,7 +47,11 @@ function authorizationView(): string {
 }
 function reportsView(): string { return `<section class="card empty"><p class="eyebrow">SESSION REPORTING</p><h2>Actual activity, when it happens</h2><p>Music plays, attendance entries, verified contributions, album sales and session rewards appear after a connected session reports them.</p><p>Use the label or family view in Music Operations to aggregate SceneSignal alongside TrackZero.</p><span class="pill">Awaiting connected session data</span></section>`; }
 async function savePlan(event: SubmitEvent): Promise<void> {
-  event.preventDefault();const data=new FormData(event.currentTarget as HTMLFormElement);const startsAtMs=Date.parse(String(data.get('starts'))),endsAtMs=Date.parse(String(data.get('ends')));
+  event.preventDefault();
+  // Revoke pending audition immediately, before asynchronous condition hashing.
+  auditionGeneration++;const activeAudio=audio;audio=undefined;
+  if(activeAudio)void activeAudio.close().catch(()=>{});
+  const data=new FormData(event.currentTarget as HTMLFormElement);const startsAtMs=Date.parse(String(data.get('starts'))),endsAtMs=Date.parse(String(data.get('ends')));
   try { const conditions=String(data.get('conditions'));const siteId=String(data.get('site'));const digest=await privateConditionsDigest({siteId,conditions,startsAtMs,endsAtMs});const previous=session.snapshot().plan;session.revise(actor,{...previous,siteId,revision:previous.revision+1,publicSummary:String(data.get('summary')),startsAtMs,endsAtMs,maximumLinearGain:Number(data.get('gain')),conditionsDigestHex:digest},Date.now());privateConditions=conditions;preparedPermit=undefined;message='Session plan saved in this tab. Authorization is required before activation.'; }
   catch { message='Check the site reference, time range and gain ceiling.'; } render();
 }

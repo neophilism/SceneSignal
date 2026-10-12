@@ -11,3 +11,7 @@ Use Node 24.19.0. Run `npm run core:prepare` to fetch/build the immutable source
 `npm run dev` opens the local draft workspace: plan the session, upload aligned mono WAV stems, place instruments and draft speakers, audition their mixes and prepare encrypted private evidence. [Browser workspace and validation](docs/browser-workspace.md). Drafts stay in the browser tab; public activation requires connected identity, authorization and endpoint channels.
 
 The library accepts trusted identity and authenticated E2EE channel adapters. It does not supply a fallback account or key protocol. Current software checks use explicit test adapters; native output enforcement, real permit/authorization operations, hardware pilots, deployed recovery and independent review remain release requirements. Development continues in the four-repository order recorded in the roadmap.
+
+## End-to-End Everywhere progress
+
+The canonical [security/e2eesa-status.json](security/e2eesa-status.json) records standard implementation, complete testing and independent expert review separately. Engine Room reads it automatically from GitHub. All initial stages are pending; existing profile locks and approved decisions remain authoritative. Read [adoption and independent-account instructions](docs/E2EESA_ADOPTION.md), and run `python3 scripts/validate_e2eesa_status.py`. Record validation does not establish product security or certification.
