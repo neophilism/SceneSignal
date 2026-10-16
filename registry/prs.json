@@ -1,9 +1,15 @@
 {
-  "schemaVersion": 1,
   "repository": "neophilism/SceneSignal",
-  "roadmapVersion": 1,
+  "title": "SceneSignal",
   "planVerified": true,
   "plannedPrCount": 32,
+  "sourceFiles": [
+    "docs/roadmap.json",
+    "docs/DEVELOPMENT_PLAN.md"
+  ],
+  "scopeNote": "Units filtered by this repository prefix from the multi-repository shared roadmap. Other repository units are not counted here.",
+  "schemaVersion": 1,
+  "roadmapVersion": 1,
   "observedAt": "2026-10-11T17:40:57.644Z",
   "units": [
     {
@@ -12,7 +18,10 @@
       "origin": "original",
       "prs": [
         2
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-02",
@@ -20,7 +29,10 @@
       "origin": "original",
       "prs": [
         2
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-03",
@@ -28,7 +40,10 @@
       "origin": "original",
       "prs": [
         2
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-04",
@@ -36,7 +51,10 @@
       "origin": "original",
       "prs": [
         2
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-05",
@@ -44,7 +62,10 @@
       "origin": "original",
       "prs": [
         2
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-06",
@@ -52,7 +73,10 @@
       "origin": "original",
       "prs": [
         2
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-07",
@@ -60,7 +84,10 @@
       "origin": "original",
       "prs": [
         5
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-08",
@@ -68,7 +95,10 @@
       "origin": "original",
       "prs": [
         6
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-09",
@@ -76,7 +106,10 @@
       "origin": "original",
       "prs": [
         8
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-10",
@@ -84,7 +117,10 @@
       "origin": "original",
       "prs": [
         10
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-11",
@@ -92,7 +128,10 @@
       "origin": "original",
       "prs": [
         3
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-12",
@@ -100,7 +139,10 @@
       "origin": "original",
       "prs": [
         12
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-13",
@@ -108,7 +150,10 @@
       "origin": "original",
       "prs": [
         3
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-14",
@@ -116,13 +161,19 @@
       "origin": "original",
       "prs": [
         3
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-15",
       "title": "Stem and composition ingestion",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-16",
@@ -130,7 +181,10 @@
       "origin": "original",
       "prs": [
         3
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-17",
@@ -138,7 +192,10 @@
       "origin": "original",
       "prs": [
         3
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-18",
@@ -146,7 +203,10 @@
       "origin": "original",
       "prs": [
         3
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-19",
@@ -154,7 +214,10 @@
       "origin": "original",
       "prs": [
         13
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-20",
@@ -162,7 +225,10 @@
       "origin": "original",
       "prs": [
         3
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-21",
@@ -170,31 +236,46 @@
       "origin": "original",
       "prs": [
         3
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-22",
       "title": "Preprogrammed spatial automation",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-23",
       "title": "Live scene control and operator handoff",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-24",
       "title": "Session contribution rewards",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-25",
       "title": "Accessibility and equitable participation",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-26",
@@ -202,43 +283,64 @@
       "origin": "original",
       "prs": [
         14
-      ]
+      ],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-27",
       "title": "Weather, access and site operations",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-28",
       "title": "Optional live-performance audio",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-29",
       "title": "Session settlement and impact reporting",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-30",
       "title": "Controlled 10–20-speaker pilot",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-31",
       "title": "Larger deployment qualification",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     },
     {
       "id": "SS-32",
       "title": "Public release and producer runbooks",
       "origin": "original",
-      "prs": []
+      "prs": [],
+      "dependsOn": [],
+      "externalDependencies": [],
+      "externalPrerequisites": []
     }
   ],
   "pullRequests": [
