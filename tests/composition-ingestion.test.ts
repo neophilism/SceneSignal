@@ -46,3 +46,18 @@ test('rejects extra key material and plaintext manifest fields',async()=>{
   await assert.rejects(ingestCompositionManifest({...args(),manifest:{...manifest,stems:[withKey]}}));
   await assert.rejects(ingestCompositionManifest({...args(),manifest:{...manifest,stems:[{...stem,encrypted:false as true}]}}));
 });
+
+test('rejects a caller mutation during asynchronous endpoint verification',async()=>{
+  const mutable=structuredClone(manifest);
+  await assert.rejects(ingestCompositionManifest({
+    ...args(),
+    manifest:mutable,
+    probe:async objectId=>{
+      if(objectId===stem.encryptedObjectId){
+        mutable.stems[0]!.pcmSha256='f'.repeat(64);
+        return {...await probe(objectId),pcmSha256:'f'.repeat(64)};
+      }
+      return probe(objectId);
+    }
+  }),/DECODED_ASSET_EVIDENCE_MISMATCH/);
+});

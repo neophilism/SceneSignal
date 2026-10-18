@@ -65,28 +65,30 @@ export async function ingestCompositionManifest(input: {
     Object.keys(manifest).sort().join(',') ===
       'completeMix,frames,id,revision,sampleRate,stems',
     'INVALID_COMPOSITION_MANIFEST_SHAPE');
-  identifier(manifest.id); integer(manifest.revision, 1);
-  integer(manifest.sampleRate, 8000);
-  invariant(manifest.sampleRate <= 192000, 'INVALID_SAMPLE_RATE');
-  integer(manifest.frames, 1);
-  invariant(manifest.frames <= 2_147_483_647, 'INVALID_FRAME_COUNT');
-  invariant(Array.isArray(manifest.stems) && manifest.stems.length > 0 &&
-    manifest.stems.length <= 64 && manifest.completeMix !== undefined,
+  // Freeze the caller's value before the first asynchronous probe. Every
+  // authorization and decoded-byte comparison must use this same snapshot.
+  const privateCopy = structuredClone(manifest);
+  identifier(privateCopy.id); integer(privateCopy.revision, 1);
+  integer(privateCopy.sampleRate, 8000);
+  invariant(privateCopy.sampleRate <= 192000, 'INVALID_SAMPLE_RATE');
+  integer(privateCopy.frames, 1);
+  invariant(privateCopy.frames <= 2_147_483_647, 'INVALID_FRAME_COUNT');
+  invariant(Array.isArray(privateCopy.stems) && privateCopy.stems.length > 0 &&
+    privateCopy.stems.length <= 64 && privateCopy.completeMix !== undefined,
     'INCOMPLETE_COMPOSITION');
-  const assets = [...manifest.stems, manifest.completeMix];
+  const assets = [...privateCopy.stems, privateCopy.completeMix];
   const ids = new Set<string>(), objects = new Set<string>();
   for (const asset of assets) {
     assetShape(asset);
-    invariant(asset.sampleRate === manifest.sampleRate &&
-      asset.frames === manifest.frames, 'UNALIGNED_COMPOSITION_ASSET');
+    invariant(asset.sampleRate === privateCopy.sampleRate &&
+      asset.frames === privateCopy.frames, 'UNALIGNED_COMPOSITION_ASSET');
     invariant(!ids.has(asset.id) && !objects.has(asset.encryptedObjectId),
       'DUPLICATE_COMPOSITION_ASSET');
     ids.add(asset.id); objects.add(asset.encryptedObjectId);
   }
-  invariant(manifest.completeMix.role === 'complete-mix', 'COMPLETE_MIX_REQUIRED');
-  invariant(manifest.stems.every(asset => asset.role !== 'complete-mix'),
+  invariant(privateCopy.completeMix.role === 'complete-mix', 'COMPLETE_MIX_REQUIRED');
+  invariant(privateCopy.stems.every(asset => asset.role !== 'complete-mix'),
     'STEM_ROLE_INVALID');
-  const privateCopy = structuredClone(manifest);
   for (const asset of assets) {
     invariant(rightsAllowAsset(asset.encryptedObjectId, startedAt) === true,
       'COMPOSITION_RIGHTS_DENIED');
