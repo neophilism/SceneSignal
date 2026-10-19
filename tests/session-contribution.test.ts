@@ -12,10 +12,13 @@ test('accepts scoped verifier evidence once and avoids double credit',async()=>{
  assert.deepEqual(ledger.summary(),[{contributorId:'guest',creditedSeconds:30}]);
 });
 test('denies foreign scope, stale claim, inflated seconds and receipt replay mutation',async()=>{
- for(const invalid of [{...claim,tenantId:'other'},{...claim,verifiedAtMs:1},
-   {...claim,seconds:301}]){
+ for(const [invalid,now] of [
+   [{...claim,tenantId:'other'},1100],
+   [{...claim,verifiedAtMs:1},310000],
+   [{...claim,seconds:301},1100]
+ ] as const){
    const ledger=new SessionContributionLedger(scope,async()=>invalid);
-   await assert.rejects(ledger.admit('opaque',310000));
+   await assert.rejects(ledger.admit('opaque',now));
  }
  let current=claim;
  const ledger=new SessionContributionLedger(scope,async()=>current);

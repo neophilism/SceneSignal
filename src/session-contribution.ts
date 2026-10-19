@@ -1,4 +1,4 @@
-import {identifier, integer, invariant} from '@neophilism/distributed-audio-engine';
+import {canonicalJson, identifier, integer, invariant} from '@neophilism/distributed-audio-engine';
 import type {Scope} from '@neophilism/distributed-audio-engine';
 
 /** Claim created only by an authenticated core contribution verifier. */
@@ -41,7 +41,7 @@ export class SessionContributionLedger {
     const saved=structuredClone(claim);
     const prior=this.records.get(saved.eventId);
     if(prior){
-      invariant(JSON.stringify(prior)===JSON.stringify(saved),'CONTRIBUTION_REPLAY_CONFLICT');
+      invariant(canonicalJson(prior)===canonicalJson(saved),'CONTRIBUTION_REPLAY_CONFLICT');
       return { creditedSeconds:this.seconds.get(saved.contributorId)??0,duplicate:true };
     }
     const credited=this.seconds.get(saved.contributorId)??0;
