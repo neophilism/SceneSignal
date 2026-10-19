@@ -37,6 +37,7 @@ export class SpatialWorkspace {
   applyAutomation(actor: SceneActor, automation: SpatialAutomation, nowMs: number): boolean {
     requireSceneRole(actor, this.scope, ['organizer','operator'], nowMs);
     integer(nowMs, this.lastAutomationAtMs + 1);
+    automation.assertScope(this.scope);
     // Spime control is live positional authority: do not silently override it.
     invariant(this.spimes.size === 0, 'SPIME_AUTOMATION_CONFLICT');
     const sampled = automation.sample(nowMs);

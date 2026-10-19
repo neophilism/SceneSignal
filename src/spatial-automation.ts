@@ -19,6 +19,12 @@ export class SpatialAutomation {
     invariant(scope.application === 'scenesignal', 'INVALID_SCENE_APPLICATION');
     identifier(scope.tenantId); identifier(scope.sessionId);
   }
+  /** Reject applying a private timeline in another tenant, session or product. */
+  assertScope(scope: Scope): void {
+    invariant(this.scope.tenantId === scope.tenantId &&
+      this.scope.sessionId === scope.sessionId &&
+      this.scope.application === scope.application, 'AUTOMATION_SCOPE_CONFLICT');
+  }
   schedule(actor: SceneActor, frames: SpatialKeyframe[], nowMs: number): void {
     requireSceneRole(actor, this.scope, ['organizer', 'operator'], nowMs);
     invariant(Array.isArray(frames) && frames.length >= 2 && frames.length <= 256,

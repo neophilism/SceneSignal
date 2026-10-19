@@ -49,3 +49,13 @@ test('replaying or rewinding a committed spatial automation tick fails closed',(
  assert.equal(f.workspace.applyAutomation(organizer,timeline,1600),true);
  assert.equal(f.workspace.snapshot().scene.revision,3);
 });
+
+test('another session cannot inject an otherwise aligned private automation',()=>{
+ const f=fixture();
+ const wrong={...scope,sessionId:'another-session'};
+ const timeline=new SpatialAutomation(wrong,()=>true);
+ const foreignActor={...organizer,sessionId:'another-session'};
+ timeline.schedule(foreignActor,[{atMs:1000,scene:f.scene},{atMs:2000,scene:f.scene}],900);
+ assert.throws(()=>f.workspace.applyAutomation(organizer,timeline,1500),/AUTOMATION_SCOPE_CONFLICT/);
+ assert.equal(f.workspace.snapshot().scene.revision,1);
+});
