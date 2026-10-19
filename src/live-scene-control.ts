@@ -10,6 +10,7 @@ export class LiveSceneControl {
   private holderId: string | null = null;
   private epoch = 0;
   private lastChangeMs = -1;
+  private undoState: { previous: SpatialScene; appliedRevision: number } | null = null;
   constructor(private readonly session: SceneSession, private readonly workspace: SpatialWorkspace) {
     this.scope = session.snapshot().scope;
   }
@@ -26,6 +27,7 @@ export class LiveSceneControl {
     this.actor(recipient, nowMs);
     invariant(this.holderId === null, 'SCENE_CONTROLLER_ALREADY_ASSIGNED');
     this.holderId = recipient.identityId;
+    this.undoState = null;
     this.epoch++;
     this.lastChangeMs = nowMs;
     return this.snapshot();
@@ -40,7 +42,23 @@ export class LiveSceneControl {
     this.verifyCurrent(actor, expectedEpoch, nowMs);
     invariant(!['stopped','cancelled'].includes(this.session.snapshot().state),
       'SCENE_SESSION_NOT_EDITABLE');
+    const previous = this.workspace.snapshot().scene;
     this.workspace.compose(actor, scene, nowMs);
+    this.undoState = { previous, appliedRevision: this.workspace.snapshot().scene.revision };
+    this.lastChangeMs = nowMs;
+    return { ...this.snapshot(), sceneRevision: this.workspace.snapshot().scene.revision };
+  }
+  /** Undo one successful local edit only while it is still the newest scene revision. */
+  undo(actor: SceneActor, expectedEpoch: number, nowMs: number) {
+    this.verifyCurrent(actor, expectedEpoch, nowMs);
+    invariant(!['stopped','cancelled'].includes(this.session.snapshot().state),
+      'SCENE_SESSION_NOT_EDITABLE');
+    const state = this.undoState;
+    const current = this.workspace.snapshot().scene;
+    invariant(state && current.revision === state.appliedRevision,
+      'SCENE_UNDO_CONFLICT');
+    this.workspace.compose(actor, {...state.previous, revision: current.revision + 1}, nowMs);
+    this.undoState = null;
     this.lastChangeMs = nowMs;
     return { ...this.snapshot(), sceneRevision: this.workspace.snapshot().scene.revision };
   }
@@ -57,6 +75,7 @@ export class LiveSceneControl {
   relinquish(actor: SceneActor, expectedEpoch: number, nowMs: number) {
     this.verifyCurrent(actor, expectedEpoch, nowMs);
     this.holderId = null;
+    this.undoState = null;
     this.epoch++;
     this.lastChangeMs = nowMs;
     return this.snapshot();

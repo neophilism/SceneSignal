@@ -64,3 +64,24 @@ test('expired recipient and replayed handoff cannot replace current operator',()
  assert.throws(()=>f.control.transfer(operator,first.epoch,operator,1300),/SCENE_CONTROL_LEASE_STALE/);
  assert.equal(f.control.snapshot().epoch,next.epoch);
 });
+
+test('authorized operator undo restores prior scene at a new revision',()=>{
+ const f=fixture();
+ const lease=f.control.grant(organizer,operator,1000);
+ const moved={...f.scene,revision:2,sources:[{...f.scene.sources[0]!,position:{x:3,y:0,z:0}}]};
+ f.control.edit(operator,lease.epoch,moved,1100);
+ assert.equal(f.workspace.snapshot().scene.sources[0]!.position.x,3);
+ const undone=f.control.undo(operator,lease.epoch,1200);
+ assert.equal(undone.sceneRevision,3);
+ assert.equal(f.workspace.snapshot().scene.sources[0]!.position.x,0);
+ assert.throws(()=>f.control.undo(operator,lease.epoch,1300),/SCENE_UNDO_CONFLICT/);
+});
+
+test('handoff invalidates predecessor undo and manual revision conflicts cannot be undone',()=>{
+ const f=fixture();
+ const lease=f.control.grant(organizer,operator,1000);
+ f.control.edit(operator,lease.epoch,{...f.scene,revision:2},1100);
+ const next=f.control.transfer(operator,lease.epoch,backup,1200);
+ assert.throws(()=>f.control.undo(operator,lease.epoch,1300),/SCENE_CONTROL_LEASE_STALE/);
+ assert.throws(()=>f.control.undo(backup,next.epoch,1300),/SCENE_UNDO_CONFLICT/);
+});
