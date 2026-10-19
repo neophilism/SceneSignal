@@ -111,3 +111,16 @@ test('rights revoked after the first decode prevent any subsequent endpoint acce
   }),/COMPOSITION_RIGHTS_DENIED/);
   assert.deepEqual(seen,[stem.encryptedObjectId]);
 });
+
+test('authorized endpoint probe receives the caller cancellation signal',async()=>{
+  const controller=new AbortController();
+  const observed:string[]=[];
+  await ingestCompositionManifest({...args(),signal:controller.signal,
+    probe:async(objectId,received)=>{
+      assert.equal(received,controller.signal);
+      observed.push(objectId);
+      return probe(objectId);
+    }
+  });
+  assert.deepEqual(observed,[stem.encryptedObjectId,completeMix.encryptedObjectId]);
+});

@@ -29,7 +29,7 @@ export interface DecodedAssetEvidence {
   pcmSha256: string;
 }
 /** Probe decrypts and hashes at an authorized endpoint. It must not return keys or plaintext. */
-export type EndpointAssetProbe = (encryptedObjectId: string) => Promise<DecodedAssetEvidence>;
+export type EndpointAssetProbe = (encryptedObjectId: string, signal?: AbortSignal) => Promise<DecodedAssetEvidence>;
 
 const digest = (value: string): void =>
   invariant(typeof value === 'string' && /^[a-f0-9]{64}$/.test(value), 'INVALID_PCM_DIGEST');
@@ -99,7 +99,7 @@ export async function ingestCompositionManifest(input: {
     requireSceneRole(actor, scope, ['organizer', 'operator'], probeAt);
     invariant(rightsAllowAsset(asset.encryptedObjectId, probeAt) === true,
       'COMPOSITION_RIGHTS_DENIED');
-    const evidence = await probe(asset.encryptedObjectId);
+    const evidence = await probe(asset.encryptedObjectId, signal);
     checkCancellation();
     invariant(evidence && evidence.sampleRate === asset.sampleRate &&
       evidence.frames === asset.frames && evidence.channels === asset.channels &&
