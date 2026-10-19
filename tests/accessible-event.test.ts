@@ -19,6 +19,6 @@ test('public copy strips control characters and rejects invalid schedules',()=>{
 });
 
 test('invalid date ranges cannot produce a misleading public event guide',()=>{
- assert.throws(()=>accessibleVisitorGuide({...page,startsAtMs:Number.MAX_SAFE_INTEGER,
-   endsAtMs:Number.MAX_SAFE_INTEGER+1}),/INVALID_PUBLIC_EVENT_TIME/);
+ assert.throws(()=>accessibleVisitorGuide({...page,startsAtMs:9000000000000000,
+   endsAtMs:9000000000001000}),/INVALID_PUBLIC_EVENT_TIME/);
 });
