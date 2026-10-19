@@ -58,7 +58,7 @@ test('expired recipient and replayed handoff cannot replace current operator',()
  const f=fixture();
  const first=f.control.grant(organizer,operator,1000);
  assert.throws(()=>f.control.transfer(operator,first.epoch,{...backup,expiresAtMs:1001},1200));
- assert.throws(()=>f.control.transfer(operator,first.epoch-1,backup,1200),/SCENE_CONTROL_LEASE_STALE/);
+ assert.throws(()=>f.control.transfer(operator,first.epoch+1,backup,1200),/SCENE_CONTROL_LEASE_STALE/);
  assert.equal(f.control.snapshot().holderId,'op');
  const next=f.control.transfer(operator,first.epoch,backup,1200);
  assert.throws(()=>f.control.transfer(operator,first.epoch,operator,1300),/SCENE_CONTROL_LEASE_STALE/);
