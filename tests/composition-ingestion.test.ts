@@ -97,3 +97,17 @@ test('expired role stops subsequent endpoint decoding',async()=>{
   }));
   assert.deepEqual(seen,[stem.encryptedObjectId]);
 });
+
+test('rights revoked after the first decode prevent any subsequent endpoint access',async()=>{
+  const seen:string[]=[];
+  let now=1000;
+  await assert.rejects(ingestCompositionManifest({...args(),nowMs:()=>now,
+    rightsAllowAsset:(_objectId,time)=>time<2000,
+    probe:async objectId=>{
+      seen.push(objectId);
+      now=2000;
+      return probe(objectId);
+    }
+  }),/COMPOSITION_RIGHTS_DENIED/);
+  assert.deepEqual(seen,[stem.encryptedObjectId]);
+});
