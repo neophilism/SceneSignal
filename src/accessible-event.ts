@@ -9,7 +9,7 @@ export function accessibleVisitorGuide(page: PublicSessionPage): string {
     Number.isFinite(new Date(page.endsAtMs).getTime()), 'INVALID_PUBLIC_EVENT_TIME');
   invariant(Array.isArray(page.lineup) && page.lineup.length<=100,
     'VISITOR_GUIDE_TOO_MANY_PERFORMERS');
-  const safe=(value:string)=>value.replace(/[\x00-\x1f\x7f]/g,' ').replace(/\s+/g,' ').trim();
+  const safe=(value:string)=>value.replace(/[\x00-\x1f\x7f]/g,' ').replace(/[\u202a-\u202e\u2066-\u2069]/g,' ').replace(/\s+/g,' ').trim();
   const lines=[
     'Free SceneSignal event',
     safe(page.summary),

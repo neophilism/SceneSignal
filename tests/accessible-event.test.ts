@@ -22,3 +22,9 @@ test('invalid date ranges cannot produce a misleading public event guide',()=>{
  assert.throws(()=>accessibleVisitorGuide({...page,startsAtMs:9000000000000000,
    endsAtMs:9000000000001000}),/INVALID_PUBLIC_EVENT_TIME/);
 });
+
+test('public directions cannot contain bidirectional override control characters',()=>{
+ const text=accessibleVisitorGuide({...page,eventArea:'West\u202e entrance'});
+ assert.ok(!text.includes('\u202e'));
+ assert.match(text,/West entrance/);
+});
