@@ -124,3 +124,14 @@ test('authorized endpoint probe receives the caller cancellation signal',async()
   });
   assert.deepEqual(observed,[stem.encryptedObjectId,completeMix.encryptedObjectId]);
 });
+
+test('admitted private manifest is immutable after successful verification',async()=>{
+  const accepted=await ingestCompositionManifest(args());
+  assert.equal(Object.isFrozen(accepted),true);
+  assert.equal(Object.isFrozen(accepted.stems),true);
+  assert.equal(Object.isFrozen(accepted.stems[0]),true);
+  assert.equal(Object.isFrozen(accepted.completeMix),true);
+  assert.throws(()=>{accepted.stems[0]!.pcmSha256='f'.repeat(64);},TypeError);
+  assert.throws(()=>{accepted.stems.push({...stem,id:'new'});},TypeError);
+  assert.equal(accepted.stems[0]!.pcmSha256,stem.pcmSha256);
+});

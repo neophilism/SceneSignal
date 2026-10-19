@@ -112,5 +112,9 @@ export async function ingestCompositionManifest(input: {
   invariant(assets.every(asset =>
     rightsAllowAsset(asset.encryptedObjectId, completedAt) === true),
     'COMPOSITION_RIGHTS_DENIED');
-  return privateCopy;
+  // Prevent downstream callers from rewriting fields after endpoint evidence
+  // was checked. A new revision requires a new admission transaction.
+  for (const asset of assets) Object.freeze(asset);
+  Object.freeze(privateCopy.stems);
+  return Object.freeze(privateCopy);
 }
