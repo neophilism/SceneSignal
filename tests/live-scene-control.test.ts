@@ -12,7 +12,7 @@ function fixture(){
  const scene={id:'scene',revision:1,sampleRate:8000,frames:8000,
  sources:[{id:'stem',assetId:'cipher',position:{x:0,y:0,z:0},spreadMeters:2,gain:0.2,role:'full-range'}]};
  const workspace=new SpatialWorkspace(session,scene,()=>true);
- return {workspace,control:new LiveSceneControl(session,workspace),scene};
+ return {session,workspace,control:new LiveSceneControl(session,workspace),scene};
 }
 test('authorized handoff fences prior operator and preserves revision checks',()=>{
  const f=fixture();
@@ -44,4 +44,12 @@ test('relinquish clears ownership and invalidates the old epoch',()=>{
  assert.throws(()=>f.control.edit(operator,first.epoch,{...f.scene,revision:2},1300));
  const replacement=f.control.grant(organizer,backup,1400);
  assert.ok(replacement.epoch>first.epoch);
+});
+
+test('stopped or cancelled sessions cannot accept subsequent live scene edits',()=>{
+ const f=fixture();
+ const lease=f.control.grant(organizer,operator,1000);
+ f.session.stop(organizer,1100);
+ assert.throws(()=>f.control.edit(operator,lease.epoch,{...f.scene,revision:2},1200),/SCENE_SESSION_NOT_EDITABLE/);
+ assert.equal(f.workspace.snapshot().scene.revision,1);
 });

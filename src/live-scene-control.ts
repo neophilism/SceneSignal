@@ -1,4 +1,4 @@
-import {identifier, integer, invariant} from '@neophilism/distributed-audio-engine';
+import {integer, invariant} from '@neophilism/distributed-audio-engine';
 import type {SpatialScene, Scope} from '@neophilism/distributed-audio-engine';
 import {requireSceneRole} from './session.js';
 import type {SceneActor, SceneSession} from './session.js';
@@ -10,7 +10,7 @@ export class LiveSceneControl {
   private holderId: string | null = null;
   private epoch = 0;
   private lastChangeMs = -1;
-  constructor(session: SceneSession, private readonly workspace: SpatialWorkspace) {
+  constructor(private readonly session: SceneSession, private readonly workspace: SpatialWorkspace) {
     this.scope = session.snapshot().scope;
   }
   snapshot() {
@@ -38,6 +38,8 @@ export class LiveSceneControl {
   }
   edit(actor: SceneActor, expectedEpoch: number, scene: SpatialScene, nowMs: number) {
     this.verifyCurrent(actor, expectedEpoch, nowMs);
+    invariant(!['stopped','cancelled'].includes(this.session.snapshot().state),
+      'SCENE_SESSION_NOT_EDITABLE');
     this.workspace.compose(actor, scene, nowMs);
     this.lastChangeMs = nowMs;
     return { ...this.snapshot(), sceneRevision: this.workspace.snapshot().scene.revision };
