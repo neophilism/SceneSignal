@@ -42,12 +42,15 @@ export class SceneSpeakerTransition {
   }
   /** Source changes need a separate authorized timeline revision, not an implicit topology fade. */
   setTarget(next: MixPlan, nowMs: number): void {
-    this.observe(nowMs); validate(next);
+    // A rejected target must never move the accepted topology clock.
+    integer(nowMs, this.latestMs);
+    validate(next);
     const baseline = this.target ? this.sampleInternal(nowMs).plan : this.silent(next);
     compatible(baseline, next);
     this.previous = structuredClone(baseline);
     this.target = structuredClone(next);
     this.startMs = nowMs;
+    this.latestMs = nowMs;
   }
   private sampleInternal(nowMs: number): {
     plan: MixPlan; progress: number; transitioning: boolean; fieldValidated: false
