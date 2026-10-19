@@ -75,3 +75,13 @@ test('rejected future target does not advance the committed topology clock',()=>
   transition.setTarget(plan({a:0.3}),2000);
   near(level(transition.at(2500).plan,'a'),0.25);
 });
+
+test('stale scene revision is denied without corrupting the accepted transition',()=>{
+  const transition=new SceneSpeakerTransition(1000);
+  const current=plan({a:0.2});current.revision=5;
+  transition.setTarget(current,1000);
+  const stale=plan({a:0.4});stale.revision=4;
+  assert.throws(()=>transition.setTarget(stale,2000),/STALE_SCENE_REVISION/);
+  transition.setTarget({...current,gains:{a:{stem:0.3}}},2000);
+  near(level(transition.at(2500).plan,'a'),0.25);
+});

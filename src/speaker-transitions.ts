@@ -26,6 +26,7 @@ function validate(plan: MixPlan): void {
 function compatible(current: MixPlan, next: MixPlan): void {
   invariant(current.sceneId === next.sceneId &&
     JSON.stringify(current.sourceIds) === JSON.stringify(next.sourceIds), 'SCENE_SOURCE_TOPOLOGY_CHANGED');
+  invariant(next.revision >= current.revision, 'STALE_SCENE_REVISION');
 }
 /** At a topology change, audio is never routed to removed/consent-revoked outputs. */
 export class SceneSpeakerTransition {
