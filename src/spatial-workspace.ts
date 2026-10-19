@@ -22,6 +22,7 @@ export class SpatialWorkspace {
   private readonly placements = new PlacementRegistry({ maxAgeMs: 3000, maxUncertaintyMeters: 0.5, minConfidence: 0.9 });
   private readonly scope: Scope;
   private lastAutomationAtMs = -1;
+  private activeAutomation: { timeline: SpatialAutomation; revision: number } | null = null;
   constructor(private readonly session: SceneSession, scene: SpatialScene, private readonly rightsAllowSource: (assetId: string, nowMs: number) => boolean) {
     validateScene(scene); this.scene = structuredClone(scene); this.scope = session.snapshot().scope;
   }
@@ -42,6 +43,11 @@ export class SpatialWorkspace {
     invariant(this.spimes.size === 0, 'SPIME_AUTOMATION_CONFLICT');
     const sampled = automation.sample(nowMs);
     if (!sampled) return false;
+    if (this.activeAutomation?.timeline === automation)
+      invariant(this.activeAutomation.revision === this.scene.revision,
+        'AUTOMATION_SUPERSEDED_BY_MANUAL_EDIT');
+    else invariant(sampled.revision === this.scene.revision,
+      'AUTOMATION_BASE_REVISION_CONFLICT');
     invariant(sampled.sources.length === this.scene.sources.length &&
       sampled.sources.every((source, index) =>
         source.id === this.scene.sources[index]!.id &&
@@ -50,6 +56,7 @@ export class SpatialWorkspace {
       'AUTOMATION_SOURCE_CONFLICT');
     this.compose(actor, {...sampled, revision: this.scene.revision + 1}, nowMs);
     this.lastAutomationAtMs = nowMs;
+    this.activeAutomation = { timeline: automation, revision: this.scene.revision };
     return true;
   }
   joinSpeaker(actor: SceneActor, speaker: ContributorSpeaker, nowMs: number): void {

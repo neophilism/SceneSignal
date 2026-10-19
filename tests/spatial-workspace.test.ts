@@ -59,3 +59,14 @@ test('another session cannot inject an otherwise aligned private automation',()=
  assert.throws(()=>f.workspace.applyAutomation(organizer,timeline,1500),/AUTOMATION_SCOPE_CONFLICT/);
  assert.equal(f.workspace.snapshot().scene.revision,1);
 });
+
+test('manual scene revision supersedes older spatial automation',()=>{
+ const f=fixture();
+ const timeline=new SpatialAutomation(scope,()=>true);
+ timeline.schedule(organizer,[{atMs:1000,scene:f.scene},{atMs:2000,scene:f.scene}],900);
+ assert.equal(f.workspace.applyAutomation(organizer,timeline,1500),true);
+ const manuallyUpdated=f.workspace.snapshot().scene;
+ f.workspace.compose(organizer,{...manuallyUpdated,revision:manuallyUpdated.revision+1},1550);
+ assert.throws(()=>f.workspace.applyAutomation(organizer,timeline,1600),/AUTOMATION_SUPERSEDED_BY_MANUAL_EDIT/);
+ assert.equal(f.workspace.snapshot().scene.revision,3);
+});
