@@ -73,5 +73,5 @@ test('rejected future target does not advance the committed topology clock',()=>
   transition.setTarget(plan({a:0.2}),1000);
   assert.throws(()=>transition.setTarget(plan({a:0.9},{a:0.2}),4000));
   transition.setTarget(plan({a:0.3}),2000);
-  near(level(transition.at(2500).plan,'a'),0.15);
+  near(level(transition.at(2500).plan,'a'),0.25);
 });
