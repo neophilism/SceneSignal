@@ -37,3 +37,15 @@ test('an external automation cannot substitute the workspace source',()=>{
  assert.equal(f.workspace.snapshot().scene.sources[0]!.assetId,'stem');
  assert.equal(f.workspace.snapshot().scene.revision,1);
 });
+
+test('replaying or rewinding a committed spatial automation tick fails closed',()=>{
+ const f=fixture();
+ const timeline=new SpatialAutomation(scope,()=>true);
+ timeline.schedule(organizer,[{atMs:1000,scene:f.scene},{atMs:2000,scene:f.scene}],900);
+ assert.equal(f.workspace.applyAutomation(organizer,timeline,1500),true);
+ assert.throws(()=>f.workspace.applyAutomation(organizer,timeline,1500));
+ assert.throws(()=>f.workspace.applyAutomation(organizer,timeline,1400));
+ assert.equal(f.workspace.snapshot().scene.revision,2);
+ assert.equal(f.workspace.applyAutomation(organizer,timeline,1600),true);
+ assert.equal(f.workspace.snapshot().scene.revision,3);
+});

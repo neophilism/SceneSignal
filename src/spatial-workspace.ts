@@ -21,6 +21,7 @@ export class SpatialWorkspace {
   private readonly spimes = new Map<string, Spime>();
   private readonly placements = new PlacementRegistry({ maxAgeMs: 3000, maxUncertaintyMeters: 0.5, minConfidence: 0.9 });
   private readonly scope: Scope;
+  private lastAutomationAtMs = -1;
   constructor(private readonly session: SceneSession, scene: SpatialScene, private readonly rightsAllowSource: (assetId: string, nowMs: number) => boolean) {
     validateScene(scene); this.scene = structuredClone(scene); this.scope = session.snapshot().scope;
   }
@@ -35,6 +36,7 @@ export class SpatialWorkspace {
   /** Apply an admitted endpoint timeline through the same role, revision and rights checks as manual edits. */
   applyAutomation(actor: SceneActor, automation: SpatialAutomation, nowMs: number): boolean {
     requireSceneRole(actor, this.scope, ['organizer','operator'], nowMs);
+    integer(nowMs, this.lastAutomationAtMs + 1);
     // Spime control is live positional authority: do not silently override it.
     invariant(this.spimes.size === 0, 'SPIME_AUTOMATION_CONFLICT');
     const sampled = automation.sample(nowMs);
@@ -46,6 +48,7 @@ export class SpatialWorkspace {
         source.role === this.scene.sources[index]!.role),
       'AUTOMATION_SOURCE_CONFLICT');
     this.compose(actor, {...sampled, revision: this.scene.revision + 1}, nowMs);
+    this.lastAutomationAtMs = nowMs;
     return true;
   }
   joinSpeaker(actor: SceneActor, speaker: ContributorSpeaker, nowMs: number): void {
