@@ -49,3 +49,15 @@ test('unpublish is role-protected and copied projections cannot mutate registry'
   assert.throws(()=>discovery.unpublish({...organizer,roles:['performer']},f.session,503));
   discovery.unpublish(organizer,f.session,503);assert.equal(discovery.detail('event',504),null);
 });
+
+test('printable discovery guide uses only the authorized active public projection',async()=>{
+ const f=await prepared();await f.authorize();const discovery=new SceneDiscovery();
+ discovery.publish(organizer,f.session,f.lineup,{eventArea:'Neighborhood',accessibilitySummary:null},501);
+ const text=discovery.printableGuide('event',502)!;
+ assert.match(text,/do not need a phone or an account/);
+ assert.match(text,/Neighborhood/);
+ for(const privateValue of ['PRIVATE_SITE','PRIVATE_OBJECT','conditionsDigestHex'])
+   assert.equal(text.includes(privateValue),false);
+ discovery.unpublish(organizer,f.session,503);
+ assert.equal(discovery.printableGuide('event',504),null);
+});
