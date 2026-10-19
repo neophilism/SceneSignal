@@ -31,7 +31,10 @@ export class SessionContributionLedger {
       opaqueReceipt.length<=8192,'INVALID_CONTRIBUTION_RECEIPT');
     integer(nowMs);
     const claim=await this.verify(opaqueReceipt);
-    invariant(claim && typeof claim === 'object', 'CONTRIBUTION_UNVERIFIED');
+    invariant(claim && typeof claim === 'object' && !Array.isArray(claim) &&
+      Object.keys(claim).sort().join(',') ===
+        'contributorId,eventId,seconds,sessionId,speakerId,tenantId,verifiedAtMs',
+      'CONTRIBUTION_UNVERIFIED');
     identifier(claim.eventId);identifier(claim.speakerId);identifier(claim.contributorId);
     integer(claim.seconds,1,300);integer(claim.verifiedAtMs);
     invariant(claim.tenantId===this.scope.tenantId &&

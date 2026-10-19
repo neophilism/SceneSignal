@@ -34,3 +34,9 @@ test('limits claims and refuses missing proof',async()=>{
  await assert.rejects(capped.admit('receipt',1100),/CONTRIBUTION_CREDIT_LIMIT/);
  assert.deepEqual(capped.summary(),[]);
 });
+
+test('extra verifier fields including private key material are rejected',async()=>{
+ const ledger=new SessionContributionLedger(scope,async()=>({...claim,privateKey:'never-store'}));
+ await assert.rejects(ledger.admit('cipher',1100),/CONTRIBUTION_UNVERIFIED/);
+ assert.deepEqual(ledger.summary(),[]);
+});
