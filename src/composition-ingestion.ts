@@ -94,7 +94,10 @@ export async function ingestCompositionManifest(input: {
     'STEM_ROLE_INVALID');
   for (const asset of assets) {
     checkCancellation();
-    invariant(rightsAllowAsset(asset.encryptedObjectId, startedAt) === true,
+    // Check current role and rights before invoking each endpoint decode.
+    const probeAt = nowMs();
+    requireSceneRole(actor, scope, ['organizer', 'operator'], probeAt);
+    invariant(rightsAllowAsset(asset.encryptedObjectId, probeAt) === true,
       'COMPOSITION_RIGHTS_DENIED');
     const evidence = await probe(asset.encryptedObjectId);
     checkCancellation();

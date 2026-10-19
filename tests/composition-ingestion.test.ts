@@ -84,3 +84,16 @@ test('already-cancelled ingestion performs no endpoint probe',async()=>{
   }),/COMPOSITION_INGEST_CANCELLED/);
   assert.equal(calls,0);
 });
+
+test('expired role stops subsequent endpoint decoding',async()=>{
+  const seen:string[]=[];
+  let now=1000;
+  await assert.rejects(ingestCompositionManifest({...args(),nowMs:()=>now,
+    probe:async objectId=>{
+      seen.push(objectId);
+      now=20000;
+      return probe(objectId);
+    }
+  }));
+  assert.deepEqual(seen,[stem.encryptedObjectId]);
+});
