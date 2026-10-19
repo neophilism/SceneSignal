@@ -2,6 +2,7 @@ import { PlacementRegistry, validateScene, validatePosition, createMixPlan, appl
 import type { SpatialScene, SpatialSpeaker, Position, PositionObservation, MixPlan, Scope } from '@neophilism/distributed-audio-engine';
 import { requireSceneRole } from './session.js';
 import type { SceneActor, SceneSession } from './session.js';
+import type { SpatialAutomation } from './spatial-automation.js';
 
 export interface ContributorSpeaker {
   id: string; ownerId: string; outputId: string; consentUntilMs: number;
@@ -30,6 +31,16 @@ export class SpatialWorkspace {
     invariant(scene.sources.every(s => this.rightsAllowSource(s.assetId, nowMs) === true), 'SPATIAL_SOURCE_RIGHTS_DENIED');
     invariant([...this.spimes.values()].every(s => scene.sources.some(source => source.id === s.sourceId)), 'BOUND_SPIME_SOURCE_REMOVED');
     this.scene = structuredClone(scene);
+  }
+  /** Apply an admitted endpoint timeline through the same role, revision and rights checks as manual edits. */
+  applyAutomation(actor: SceneActor, automation: SpatialAutomation, nowMs: number): boolean {
+    requireSceneRole(actor, this.scope, ['organizer','operator'], nowMs);
+    // Spime control is live positional authority: do not silently override it.
+    invariant(this.spimes.size === 0, 'SPIME_AUTOMATION_CONFLICT');
+    const sampled = automation.sample(nowMs);
+    if (!sampled) return false;
+    this.compose(actor, {...sampled, revision: this.scene.revision + 1}, nowMs);
+    return true;
   }
   joinSpeaker(actor: SceneActor, speaker: ContributorSpeaker, nowMs: number): void {
     integer(nowMs); identifier(actor.identityId); integer(actor.expiresAtMs, nowMs + 1);

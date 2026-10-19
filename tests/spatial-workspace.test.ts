@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { SceneSession, SpatialWorkspace } from '../src/index.js';
+import { SceneSession, SpatialWorkspace, SpatialAutomation } from '../src/index.js';
 import type { ContributorSpeaker, SceneActor } from '../src/index.js';
 const scope={tenantId:'t',application:'scenesignal' as const,sessionId:'s'};
 const organizer:SceneActor={tenantId:'t',sessionId:'s',identityId:'organizer',roles:['organizer'],expiresAtMs:100000};
@@ -11,3 +11,19 @@ test('fixed speaker stays independent of phone movement, expires with consent an
 test('physical-output duplicates, foreign consent, unauthenticated tracking and source-rights failures reject',()=>{const f=fixture();f.workspace.joinSpeaker(fan,speaker,1000);assert.throws(()=>f.workspace.joinSpeaker({...fan,identityId:'other'},{...speaker,id:'other'},1000));assert.throws(()=>f.workspace.joinSpeaker(fan,{...speaker,id:'clone'},1000));assert.throws(()=>f.workspace.setFixedPosition(fan,'speaker',{x:0,y:0,z:0},1000));const denied=new SpatialWorkspace(f.session,f.scene,()=>false);assert.throws(()=>denied.mixPlan(2000,'audition'));});
 test('Spime controls its instrument, never a speaker; stale position mutes the anchored source until manual fallback',()=>{const f=fixture();f.workspace.joinSpeaker(fan,speaker,1000);f.workspace.bindSpime(organizer,{id:'statue',sourceId:'violin',controllerId:'organizer',trackingObjectId:'physical-statue',trackerId:'validated-tracker',calibrationId:'cal',calibrationUntilMs:9000,method:'validated-coordinate'},1000);const observation={objectId:'physical-statue',trackerId:'validated-tracker',sequence:1,position:{x:5,y:0,z:0},atMs:1000,uncertaintyMeters:0.2,confidence:0.95,method:'validated-coordinate' as const};f.workspace.observeSpime(organizer,'statue',observation,1000);assert.equal(f.workspace.snapshot().scene.sources[0]!.position.x,5);assert.deepEqual(f.workspace.snapshot().speakers[0]!.position,speaker.position);assert.throws(()=>f.workspace.observeSpime(organizer,'statue',{...observation,sequence:2,method:'presence-only'},1001));const stale=f.workspace.mixPlan(4001,'audition');assert.deepEqual(stale.unavailableSpimeIds,['statue']);assert.equal(stale.plan.gains.speaker!.violin,0);f.workspace.removeSpime(organizer,'statue',4001);assert.ok(f.workspace.mixPlan(4001,'audition').plan.gains.speaker!.violin!>0);});
 test('tracked speaker needs validated coordinates and loses mix participation when its observations become stale',()=>{const f=fixture();f.workspace.joinSpeaker(fan,{...speaker,placement:'tracked',trackerId:'tracker'},1000);assert.equal(f.workspace.mixPlan(1000,'audition').plan.speakerIds.length,0);f.workspace.observeSpeaker(fan,{objectId:'speaker',trackerId:'tracker',sequence:1,position:{x:1,y:0,z:0},atMs:1000,uncertaintyMeters:0.1,confidence:1,method:'validated-coordinate'},1000);assert.equal(f.workspace.mixPlan(1001,'audition').plan.speakerIds.length,1);assert.equal(f.workspace.mixPlan(4001,'audition').plan.speakerIds.length,0);});
+
+test('authorized spatial automation uses workspace revision and rights boundaries',()=>{
+ const f=fixture();
+ let allowed=true;
+ const timeline=new SpatialAutomation(scope,()=>allowed);
+ timeline.schedule(organizer,[{atMs:1000,scene:f.scene},{atMs:2000,scene:{...f.scene,sources:[{...f.scene.sources[0]!,position:{x:10,y:0,z:0}}]}}],900);
+ assert.equal(f.workspace.applyAutomation(organizer,timeline,999),false);
+ assert.throws(()=>f.workspace.applyAutomation(fan,timeline,1500));
+ assert.equal(f.workspace.applyAutomation(organizer,timeline,1500),true);
+ const first=f.workspace.snapshot().scene;
+ assert.equal(first.revision,2);
+ assert.equal(first.sources[0]!.position.x,5);
+ allowed=false;
+ assert.throws(()=>f.workspace.applyAutomation(organizer,timeline,1600));
+ assert.equal(f.workspace.snapshot().scene.revision,2);
+});
