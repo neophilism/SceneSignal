@@ -39,6 +39,12 @@ export class SpatialWorkspace {
     invariant(this.spimes.size === 0, 'SPIME_AUTOMATION_CONFLICT');
     const sampled = automation.sample(nowMs);
     if (!sampled) return false;
+    invariant(sampled.sources.length === this.scene.sources.length &&
+      sampled.sources.every((source, index) =>
+        source.id === this.scene.sources[index]!.id &&
+        source.assetId === this.scene.sources[index]!.assetId &&
+        source.role === this.scene.sources[index]!.role),
+      'AUTOMATION_SOURCE_CONFLICT');
     this.compose(actor, {...sampled, revision: this.scene.revision + 1}, nowMs);
     return true;
   }

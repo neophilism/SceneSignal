@@ -27,3 +27,13 @@ test('authorized spatial automation uses workspace revision and rights boundarie
  assert.throws(()=>f.workspace.applyAutomation(organizer,timeline,1600));
  assert.equal(f.workspace.snapshot().scene.revision,2);
 });
+
+test('an external automation cannot substitute the workspace source',()=>{
+ const f=fixture();
+ const foreign={...f.scene,sources:[{...f.scene.sources[0]!,assetId:'other-stem'}]};
+ const timeline=new SpatialAutomation(scope,()=>true);
+ timeline.schedule(organizer,[{atMs:1000,scene:foreign},{atMs:2000,scene:foreign}],900);
+ assert.throws(()=>f.workspace.applyAutomation(organizer,timeline,1500),/AUTOMATION_SOURCE_CONFLICT/);
+ assert.equal(f.workspace.snapshot().scene.sources[0]!.assetId,'stem');
+ assert.equal(f.workspace.snapshot().scene.revision,1);
+});
