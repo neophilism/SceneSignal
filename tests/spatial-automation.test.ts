@@ -40,3 +40,13 @@ test('rights revocation prevents later sampling',()=>{
  allowed=false;
  assert.throws(()=>automation.sample(1500));
 });
+
+test('mutating the constructor scope cannot rebind an authorized private timeline',()=>{
+ const mutable={...scope};
+ const automation=new SpatialAutomation(mutable,()=>true);
+ mutable.sessionId='other-session';
+ automation.assertScope(scope);
+ assert.throws(()=>automation.assertScope(mutable),/AUTOMATION_SCOPE_CONFLICT/);
+ automation.schedule(organizer,frames,900);
+ assert.equal(automation.sample(1500)!.sources[0]!.position.x,5);
+});

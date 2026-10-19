@@ -18,6 +18,7 @@ export class SpatialAutomation {
     private readonly rightsAllowSource: (assetId: string, nowMs: number) => boolean) {
     invariant(scope.application === 'scenesignal', 'INVALID_SCENE_APPLICATION');
     identifier(scope.tenantId); identifier(scope.sessionId);
+    this.scope = structuredClone(scope);
   }
   /** Reject applying a private timeline in another tenant, session or product. */
   assertScope(scope: Scope): void {
