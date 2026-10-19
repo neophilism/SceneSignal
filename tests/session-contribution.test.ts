@@ -40,3 +40,12 @@ test('extra verifier fields including private key material are rejected',async()
  await assert.rejects(ledger.admit('cipher',1100),/CONTRIBUTION_UNVERIFIED/);
  assert.deepEqual(ledger.summary(),[]);
 });
+
+test('multiple unique observations never exceed per-contributor allowance',async()=>{
+ let current=claim;
+ const ledger=new SessionContributionLedger(scope,async()=>current,50);
+ await ledger.admit('first',1100);
+ current={...claim,eventId:'second',seconds:21};
+ await assert.rejects(ledger.admit('second',1100),/CONTRIBUTION_CREDIT_LIMIT/);
+ assert.deepEqual(ledger.summary(),[{contributorId:'guest',creditedSeconds:30}]);
+});
