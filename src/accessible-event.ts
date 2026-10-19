@@ -5,7 +5,10 @@ import type {PublicSessionPage} from './discovery.js';
 export function accessibleVisitorGuide(page: PublicSessionPage): string {
   invariant(page.freeAdmission === true, 'VISITOR_GUIDE_NOT_FREE');
   integer(page.startsAtMs);integer(page.endsAtMs,page.startsAtMs+1);
-  invariant(page.lineup.length<=100, 'VISITOR_GUIDE_TOO_MANY_PERFORMERS');
+  invariant(Number.isFinite(new Date(page.startsAtMs).getTime()) &&
+    Number.isFinite(new Date(page.endsAtMs).getTime()), 'INVALID_PUBLIC_EVENT_TIME');
+  invariant(Array.isArray(page.lineup) && page.lineup.length<=100,
+    'VISITOR_GUIDE_TOO_MANY_PERFORMERS');
   const safe=(value:string)=>value.replace(/[\x00-\x1f\x7f]/g,' ').replace(/\s+/g,' ').trim();
   const lines=[
     'Free SceneSignal event',

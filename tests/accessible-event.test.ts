@@ -17,3 +17,8 @@ test('public copy strips control characters and rejects invalid schedules',()=>{
  assert.ok(!text.includes('\u0000'));
  assert.throws(()=>accessibleVisitorGuide({...page,endsAtMs:1000}));
 });
+
+test('invalid date ranges cannot produce a misleading public event guide',()=>{
+ assert.throws(()=>accessibleVisitorGuide({...page,startsAtMs:Number.MAX_SAFE_INTEGER,
+   endsAtMs:Number.MAX_SAFE_INTEGER+1}),/INVALID_PUBLIC_EVENT_TIME/);
+});
