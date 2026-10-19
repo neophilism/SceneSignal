@@ -61,3 +61,26 @@ test('rejects a caller mutation during asynchronous endpoint verification',async
     }
   }),/DECODED_ASSET_EVIDENCE_MISMATCH/);
 });
+
+test('cancellation during endpoint decode aborts ingestion without probing other assets',async()=>{
+  const controller=new AbortController();
+  const seen:string[]=[];
+  await assert.rejects(ingestCompositionManifest({...args(),signal:controller.signal,
+    probe:async objectId=>{
+      seen.push(objectId);
+      controller.abort();
+      return probe(objectId);
+    }
+  }),/COMPOSITION_INGEST_CANCELLED/);
+  assert.deepEqual(seen,[stem.encryptedObjectId]);
+});
+
+test('already-cancelled ingestion performs no endpoint probe',async()=>{
+  const controller=new AbortController();
+  controller.abort();
+  let calls=0;
+  await assert.rejects(ingestCompositionManifest({...args(),signal:controller.signal,
+    probe:async objectId=>{calls++;return probe(objectId);}
+  }),/COMPOSITION_INGEST_CANCELLED/);
+  assert.equal(calls,0);
+});

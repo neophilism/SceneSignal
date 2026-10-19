@@ -57,8 +57,11 @@ export async function ingestCompositionManifest(input: {
   nowMs: () => number;
   rightsAllowAsset: (encryptedObjectId: string, nowMs: number) => boolean;
   probe: EndpointAssetProbe;
+  signal?: AbortSignal;
 }): Promise<CompositionManifest> {
-  const {actor, scope, manifest, nowMs, rightsAllowAsset, probe} = input;
+  const {actor, scope, manifest, nowMs, rightsAllowAsset, probe, signal} = input;
+  const checkCancellation = () => invariant(!signal?.aborted, 'COMPOSITION_INGEST_CANCELLED');
+  checkCancellation();
   const startedAt = nowMs();
   requireSceneRole(actor, scope, ['organizer', 'operator'], startedAt);
   invariant(manifest && typeof manifest === 'object' && !Array.isArray(manifest) &&
@@ -90,14 +93,17 @@ export async function ingestCompositionManifest(input: {
   invariant(privateCopy.stems.every(asset => asset.role !== 'complete-mix'),
     'STEM_ROLE_INVALID');
   for (const asset of assets) {
+    checkCancellation();
     invariant(rightsAllowAsset(asset.encryptedObjectId, startedAt) === true,
       'COMPOSITION_RIGHTS_DENIED');
     const evidence = await probe(asset.encryptedObjectId);
+    checkCancellation();
     invariant(evidence && evidence.sampleRate === asset.sampleRate &&
       evidence.frames === asset.frames && evidence.channels === asset.channels &&
       evidence.pcmSha256 === asset.pcmSha256,
       'DECODED_ASSET_EVIDENCE_MISMATCH');
   }
+  checkCancellation();
   const completedAt = nowMs();
   requireSceneRole(actor, scope, ['organizer', 'operator'], completedAt);
   invariant(assets.every(asset =>
