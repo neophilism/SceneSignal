@@ -7,3 +7,4 @@ export * from './sponsorship.js';
 export * from './site-coordinator.js';
 export * from './commerce.js';
 export * from './composition-ingestion.js';
+export * from './live-scene-control.js';
